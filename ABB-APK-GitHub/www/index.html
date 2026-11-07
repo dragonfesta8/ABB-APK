@@ -163,9 +163,14 @@ function reproduzir(url) {
 
   player.style.display = 'block';
   video.src = url;
-  video.play().catch(() => {
+
+  video.play().then(() => {
+    if (video.requestFullscreen) {
+      video.requestFullscreen().catch(() => {});
+    }
+  }).catch(() => {
     document.getElementById('status').textContent =
-      'Não foi possível iniciar. Verifique o formato e a autorização da transmissão.';
+      'Não foi possível reproduzir este canal.';
   });
 }
 
