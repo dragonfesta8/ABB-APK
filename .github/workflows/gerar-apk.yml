@@ -1,0 +1,61 @@
+name: Gerar APK ABB para Android TV
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_url:
+        description: "Endereço HTTPS publicado do ABB"
+        required: true
+        type: string
+
+jobs:
+  build-apk:
+    name: Gerar APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Configurar Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Instalar dependências
+        run: bun install --frozen-lockfile
+
+      - name: Configurar endereço do ABB
+        env:
+          ABB_APP_URL: ${{ inputs.app_url }}
+        run: bun scripts/configure.mjs
+
+      - name: Criar projeto Android
+        run: |
+          bunx cap add android || true
+          bunx cap sync android
+
+      - name: Configurar Android TV e TV Box
+        run: bun scripts/android-tv.mjs
+
+      - name: Compilar APK Debug
+        working-directory: android
+        run: ./gradlew assembleDebug
+
+      - name: Enviar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ABB-AndroidTV-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
