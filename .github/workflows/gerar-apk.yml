@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ABB
+        working-directory: abb 
 
     steps:
       - name: Baixar projeto
@@ -54,5 +54,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ABB-AndroidTV-APK
-          path: ABB/android/app/build/outputs/apk/debug/app-debug.apk
+          path: path: abb/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
