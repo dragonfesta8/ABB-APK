@@ -1,84 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABB IPTV</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+<style>
+* { box-sizing: border-box; }
 
-  <title>ABB</title>
+body {
+  margin: 0;
+  background: #080d18;
+  color: white;
+  font-family: Arial, sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+header {
+  padding: 30px 5%;
+  background: #101a2d;
+  border-bottom: 2px solid #1478ff;
+}
 
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: #101010;
-      color: white;
-    }
+.logo {
+  color: #1685ff;
+  font-size: 38px;
+  font-weight: bold;
+}
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+main {
+  padding: 45px 5%;
+}
 
-    .container {
-      text-align: center;
-      padding: 40px;
-    }
+h1 { font-size: 30px; }
 
-    h1 {
-      font-size: clamp(42px, 7vw, 90px);
-      margin: 0 0 20px;
-      letter-spacing: 4px;
-    }
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 35px;
+}
 
-    p {
-      font-size: clamp(18px, 2vw, 30px);
-      color: #cccccc;
-      margin: 0;
-    }
+.item {
+  width: 240px;
+  min-height: 145px;
+  padding: 25px;
+  background: #17243a;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  color: white;
+  font-size: 22px;
+  text-align: left;
+  cursor: pointer;
+}
 
-    .loader {
-      width: 55px;
-      height: 55px;
-      margin: 35px auto 0;
-      border: 6px solid #444;
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+.item:focus {
+  outline: none;
+  border-color: #1685ff;
+  background: #203b61;
+  transform: scale(1.04);
+}
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+.item span {
+  display: block;
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+#status {
+  margin-top: 35px;
+  color: #aabbd3;
+  font-size: 17px;
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
-    <h1>ABB</h1>
+<header>
+  <div class="logo">ABB IPTV</div>
+</header>
 
-    <p>Conectando ao serviço...</p>
+<main>
+  <h1>Bem-vindo ao ABB</h1>
+  <p>Escolha uma categoria para começar.</p>
 
-    <div
-      class="loader"
-      aria-label="Carregando"
-    ></div>
-  </main>
+  <div class="menu">
+    <button class="item" onclick="abrir('TV ao vivo')">
+      <span>📺</span>
+      TV ao vivo
+    </button>
+
+    <button class="item" onclick="abrir('Filmes')">
+      <span>🎬</span>
+      Filmes
+    </button>
+
+    <button class="item" onclick="abrir('Séries')">
+      <span>📚</span>
+      Séries
+    </button>
+  </div>
+
+  <div id="status">
+    ABB iniciado. Aguardando configuração de conteúdo.
+  </div>
+</main>
+
+<script>
+function abrir(categoria) {
+  document.getElementById('status').textContent =
+    categoria + ': conteúdo ainda não configurado.';
+}
+
+document.querySelector('.item').focus();
+</script>
 
 </body>
 </html>
