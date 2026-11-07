@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,7 +17,7 @@ body {
 }
 
 header {
-  padding: 30px 5%;
+  padding: 25px 5%;
   background: #101a2d;
   border-bottom: 2px solid #1478ff;
 }
@@ -27,49 +28,55 @@ header {
   font-weight: bold;
 }
 
-main {
-  padding: 45px 5%;
-}
-
-h1 { font-size: 30px; }
+main { padding: 30px 5%; }
 
 .menu {
   display: flex;
   flex-wrap: wrap;
-  gap: 22px;
-  margin-top: 35px;
+  gap: 15px;
+  margin: 25px 0;
 }
 
-.item {
-  width: 240px;
-  min-height: 145px;
-  padding: 25px;
+.item, .channel {
+  padding: 18px;
   background: #17243a;
-  border: 3px solid transparent;
-  border-radius: 12px;
+  border: 2px solid transparent;
+  border-radius: 10px;
   color: white;
-  font-size: 22px;
-  text-align: left;
+  font-size: 18px;
   cursor: pointer;
 }
 
-.item:focus {
+.item:focus, .channel:focus {
   outline: none;
   border-color: #1685ff;
   background: #203b61;
-  transform: scale(1.04);
 }
 
-.item span {
-  display: block;
-  font-size: 38px;
-  margin-bottom: 15px;
+#player {
+  display: none;
+  width: 100%;
+  max-width: 900px;
+  background: #000;
+  margin-top: 20px;
+}
+
+video {
+  width: 100%;
+  max-height: 500px;
+  background: #000;
+}
+
+#channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 #status {
-  margin-top: 35px;
+  margin-top: 25px;
   color: #aabbd3;
-  font-size: 17px;
 }
 </style>
 </head>
@@ -85,29 +92,84 @@ h1 { font-size: 30px; }
   <p>Escolha uma categoria para começar.</p>
 
   <div class="menu">
-    <button class="item" onclick="abrir('TV ao vivo')">
-      <span>📺</span>
-      TV ao vivo
-    </button>
-
-    <button class="item" onclick="abrir('Filmes')">
-      <span>🎬</span>
-      Filmes
-    </button>
-
-    <button class="item" onclick="abrir('Séries')">
-      <span>📚</span>
-      Séries
-    </button>
+    <button class="item" onclick="abrirTV()">📺 TV ao vivo</button>
+    <button class="item" onclick="mensagem('Filmes')">🎬 Filmes</button>
+    <button class="item" onclick="mensagem('Séries')">📚 Séries</button>
   </div>
 
+  <section id="tv" style="display:none">
+    <h2>TV ao vivo</h2>
+    <div id="channels"></div>
+
+    <div id="player">
+      <video id="video" controls autoplay></video>
+    </div>
+  </section>
+
   <div id="status">
-    ABB iniciado. Aguardando configuração de conteúdo.
+    ABB iniciado.
   </div>
 </main>
 
 <script>
-function abrir(categoria) {
+async function abrirTV() {
+  const tv = document.getElementById('tv');
+  const lista = document.getElementById('channels');
+
+  tv.style.display = 'block';
+  lista.innerHTML = '';
+
+  document.getElementById('status').textContent =
+    'Carregando lista de canais...';
+
+  try {
+    const resposta = await fetch('channels.m3u');
+    if (!resposta.ok) throw new Error('Lista não encontrada');
+
+    const conteudo = await resposta.text();
+    const linhas = conteudo.split(/\r?\n/);
+
+    let nome = '';
+
+    linhas.forEach(linha => {
+      linha = linha.trim();
+
+      if (linha.startsWith('#EXTINF:')) {
+        nome = linha.split(',').pop().trim();
+      } else if (linha && !linha.startsWith('#') &&
+                 linha.startsWith('https://')) {
+        const botao = document.createElement('button');
+        botao.className = 'channel';
+        botao.textContent = nome || 'Canal';
+        botao.onclick = () => reproduzir(linha);
+        lista.appendChild(botao);
+        nome = '';
+      }
+    });
+
+    document.getElementById('status').textContent =
+      lista.children.length
+        ? 'Selecione um canal.'
+        : 'Nenhum canal autorizado configurado.';
+  } catch (erro) {
+    document.getElementById('status').textContent =
+      'Não foi possível carregar channels.m3u.';
+  }
+}
+
+function reproduzir(url) {
+  const player = document.getElementById('player');
+  const video = document.getElementById('video');
+
+  player.style.display = 'block';
+  video.src = url;
+  video.play().catch(() => {
+    document.getElementById('status').textContent =
+      'Não foi possível iniciar. Verifique o formato e a autorização da transmissão.';
+  });
+}
+
+function mensagem(categoria) {
   document.getElementById('status').textContent =
     categoria + ': conteúdo ainda não configurado.';
 }
