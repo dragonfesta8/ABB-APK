@@ -8,6 +8,10 @@ jobs:
     name: Compilar APK
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ABB
+
     steps:
       - name: Baixar projeto
         uses: actions/checkout@v4
@@ -29,7 +33,7 @@ jobs:
           java-version: "17"
 
       - name: Instalar dependências
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Configurar ABB local
         run: bun scripts/configure.mjs
@@ -44,11 +48,11 @@ jobs:
         run: bun scripts/android-tv.mjs
 
       - name: Compilar APK
-        working-directory: android
-        run: ./gradlew assembleDebug
+        run: cd android && ./gradlew assembleDebug
 
       - name: Disponibilizar APK
         uses: actions/upload-artifact@v4
         with:
           name: ABB-AndroidTV-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: ABB/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
