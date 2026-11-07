@@ -1,0 +1,11 @@
+import { readFileSync, writeFileSync, copyFileSync, mkdirSync } from 'node:fs';
+const path='android/app/src/main/AndroidManifest.xml';
+let manifest=readFileSync(path,'utf8');
+if (!manifest.includes('android.software.leanback')) manifest=manifest.replace('<application','<uses-feature android:name="android.software.leanback" android:required="false" />\n    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />\n    <application');
+if (!manifest.includes('android.intent.category.LEANBACK_LAUNCHER')) manifest=manifest.replace('<category android:name="android.intent.category.LAUNCHER" />','<category android:name="android.intent.category.LAUNCHER" />\n                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />');
+manifest=manifest.replace('android:icon="@mipmap/ic_launcher"','android:icon="@drawable/abb_icon"').replace('android:roundIcon="@mipmap/ic_launcher_round"','android:roundIcon="@drawable/abb_icon"');
+if (!manifest.includes('android:banner=')) manifest=manifest.replace('<application','<application android:banner="@drawable/abb_tv_cover"');
+writeFileSync(path,manifest);
+mkdirSync('android/app/src/main/res/drawable',{recursive:true});
+for (const [from,to] of [['abb-icon.png','abb_icon.png'],['abb-tv-cover.png','abb_tv_cover.png']]) copyFileSync('www/'+from,'android/app/src/main/res/drawable/'+to);
+console.log('Entrada Android TV e ícones configurados.');
