@@ -1,4 +1,3 @@
-
 import {
   writeFileSync,
   copyFileSync,
