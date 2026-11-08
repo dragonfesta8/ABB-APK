@@ -397,55 +397,19 @@ function abrirPlayer(canal) {
   telaAtual = 'player';
   pageTitle.textContent = canal.nome;
 
-  document.getElementById('player-title').textContent = canal.nome;
+  document.getElementById('player-title').textContent =
+    canal.nome;
+
   playerMessage.textContent = 'Abrindo canal...';
 
-  if (hls) {
-    hls.destroy();
-    hls = null;
-  }
-
-  video.pause();
-  video.removeAttribute('src');
-  video.load();
-
-  if (window.Hls && Hls.isSupported()) {
-    hls = new Hls();
-
-    hls.loadSource(canal.url);
-    hls.attachMedia(video);
-
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play().then(() => {
-        playerMessage.textContent = canal.nome;
-      }).catch(() => {
-        playerMessage.textContent = 'Canal carregado. Pressione Play.';
-      });
-    });
-
-    hls.on(Hls.Events.ERROR, function(event, data) {
-      if (data.fatal) {
-        playerMessage.textContent =
-          'Erro ao reproduzir. Verifique o sinal do canal.';
-        hls.destroy();
-        hls = null;
-      }
-    });
-
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = canal.url;
-    video.play().then(() => {
-      playerMessage.textContent = canal.nome;
-    }).catch(() => {
-      playerMessage.textContent = 'Canal carregado. Pressione Play.';
-    });
-
+  if (window.AbbPlayer && window.AbbPlayer.play) {
+    window.AbbPlayer.play(canal.url, canal.nome);
+    playerMessage.textContent = 'Reprodutor Android iniciado.';
   } else {
     playerMessage.textContent =
-      'Este dispositivo não suporta a reprodução deste canal.';
+      'Reprodutor nativo indisponível nesta versão.';
   }
 }
-
 function fecharPlayer() {
   video.pause();
 
