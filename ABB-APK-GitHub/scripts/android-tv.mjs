@@ -245,8 +245,8 @@ if (!gradle.includes('media3-exoplayer')) {
   gradle += `
 
 dependencies {
-    implementation "androidx.media3:media3-exoplayer:1.11.1"
-    implementation "androidx.media3:media3-ui:1.11.1"
+    implementation "androidx.media3:media3-exoplayer:1.8.1"
+    implementation "androidx.media3:media3-ui:1.8.1"
 }
 `;
   writeFileSync(gradlePath, gradle);
