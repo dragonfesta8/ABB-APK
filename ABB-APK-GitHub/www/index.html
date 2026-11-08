@@ -1,3 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABB IPTV</title>
+
+<style>
+:root {
+  --bg: #0d0b14;
+  --panel: #171322;
+  --panel-light: #211b30;
+  --lilac: #c7a6ff;
+  --mint: #8ff0c4;
+  --white: #ffffff;
+  --muted: #aaa2b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 22px;
+  background: var(--panel);
+  border-bottom: 2px solid var(--lilac);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--lilac);
+}
+
+#page-title {
+  color: var(--mint);
+  font-size: 18px;
+}
+
+main {
+  padding: 24px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.home-title {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+}
+
+button {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 18px;
+  background: var(--panel-light);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: left;
+}
+
+button:focus {
+  outline: none;
+  border-color: var(--mint);
+  background: #352849;
+  transform: scale(1.02);
+}
+
+.menu button {
+  min-height: 115px;
+  font-size: 20px;
+  color: var(--lilac);
+}
+
+.panel-title {
+  font-size: 21px;
+  color: var(--mint);
+  margin-bottom: 18px;
+}
+
+#channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.channel-button {
+  min-height: 70px;
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.actions button {
+  font-size: 14px;
+}
+
+#status {
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+#video {
+  width: 100%;
+  max-height: 70vh;
+  background: black;
+  border-radius: 12px;
+}
+
+#player-message {
+  margin: 15px 0;
+  color: var(--mint);
+}
+
+@media (min-width: 800px) {
+  main {
+    padding: 35px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ABB IPTV</div>
+  <div id="page-title">Início</div>
+</header>
+
+<main>
+
+<section id="home" class="screen active">
+  <div class="home-title">Bem-vindo ao ABB IPTV</div>
+
+  <div class="menu">
+    <button id="tv-button">📺 TV AO VIVO</button>
+    <button onclick="mostrarMensagem('Filmes em desenvolvimento')">
+      🎬 FILMES
+    </button>
+    <button onclick="mostrarMensagem('Séries em desenvolvimento')">
+      📁 SÉRIES
+    </button>
+  </div>
+</section>
+
+<section id="tv-screen" class="screen">
+  <div class="panel-title">CANAIS</div>
+  <div id="channels"></div>
+  <div id="status">Carregando...</div>
+</section>
+
+<section id="player-screen" class="screen">
+  <div class="panel-title" id="player-title">REPRODUTOR</div>
+  <div id="player-message">Carregando canal...</div>
+  <video id="video" controls autoplay playsinline></video>
+
+  <div class="actions">
+    <button onclick="fecharPlayer()">⬅ Voltar</button>
+  </div>
+</section>
+
+</main>
 
 <script>
 const home = document.getElementById('home');
@@ -17,357 +207,266 @@ const arquivos = [
 
 const TAMANHO_PAGINA = 50;
 
+let listaCanais = [];
 let categorias = [];
 let categoriaAtual = '';
 let paginaAtual = 0;
-let telaAtual = 'inicio';
-let categoriasCarregadas = false;
+let telaAtual = 'home';
 
-/* LEITURA DA PLAYLIST EM BLOCOS */
-async function lerLinhas(arquivo, callback) {
-  const resposta = await fetch(arquivo);
+async function carregarListas() {
+  listaCanais = [];
 
-  if (!resposta.ok) {
-    throw new Error('Não foi possível abrir ' + arquivo);
-  }
+  for (const arquivo of arquivos) {
+    try {
+      const resposta = await fetch('./' + arquivo);
 
-  if (!resposta.body) {
-    const texto = await resposta.text();
-    texto.split(/\r?\n/).forEach(callback);
-    return;
-  }
+      if (!resposta.ok) {
+        throw new Error('Não foi possível abrir ' + arquivo);
+      }
 
-  const leitor = resposta.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
+      const texto = await resposta.text();
+      const linhas = texto.split(/\r?\n/);
 
-  while (true) {
-    const { value, done } = await leitor.read();
+      let dados = null;
 
-    if (done) break;
-
-    buffer += decoder.decode(value, { stream: true });
-
-    const linhas = buffer.split(/\r?\n/);
-    buffer = linhas.pop();
-
-    linhas.forEach(callback);
-  }
-
-  buffer += decoder.decode();
-
-  if (buffer.trim()) {
-    callback(buffer);
-  }
-}
-
-/* INTERPRETAR INFORMAÇÕES DO CANAL */
-function interpretarExtinf(linha) {
-  const virgula = linha.indexOf(',');
-  const nome = virgula >= 0
-    ? linha.substring(virgula + 1).trim()
-    : 'Canal';
-
-  const grupo = linha.match(/group-title="([^"]*)"/i);
-
-  return {
-    nome: nome || 'Canal',
-    categoria: grupo && grupo[1].trim()
-      ? grupo[1].trim()
-      : 'Outros'
-  };
-}
-
-/* CARREGAR CATEGORIAS DOS DOIS ARQUIVOS */
-async function carregarCategorias() {
-  status.textContent = 'Lendo categorias...';
-
-  const encontrados = new Set();
-
-  try {
-    for (const arquivo of arquivos) {
-      let info = null;
-
-      await lerLinhas(arquivo, (linhaOriginal) => {
+      for (const linhaOriginal of linhas) {
         const linha = linhaOriginal.trim();
 
         if (linha.startsWith('#EXTINF:')) {
-          info = interpretarExtinf(linha);
-          return;
-        }
+          const nome = linha.includes(',')
+            ? linha.substring(linha.lastIndexOf(',') + 1).trim()
+            : 'Canal sem nome';
 
-        if (
+          const grupo = linha.match(/group-title="([^"]*)"/i);
+
+          dados = {
+            nome: nome || 'Canal sem nome',
+            categoria: grupo && grupo[1]
+              ? grupo[1].trim()
+              : 'Outros'
+          };
+        } else if (
+          dados &&
           linha &&
-          !linha.startsWith('#') &&
-          /^https?:\/\//i.test(linha)
+          !linha.startsWith('#')
         ) {
-          if (info) {
-            encontrados.add(info.categoria);
-          }
+          listaCanais.push({
+            nome: dados.nome,
+            categoria: dados.categoria,
+            url: linha
+          });
 
-          info = null;
+          dados = null;
         }
-      });
+      }
+    } catch (erro) {
+      console.error(erro);
     }
-
-    categorias = [...encontrados].sort();
-    categoriasCarregadas = true;
-
-    mostrarCategorias();
-
-    status.textContent =
-      `${categorias.length} categoria(s) encontrada(s).`;
-
-  } catch (erro) {
-    console.error(erro);
-    status.textContent =
-      'Erro ao ler as playlists. Verifique os arquivos na pasta www.';
   }
+
+  categorias = [...new Set(
+    listaCanais.map(canal => canal.categoria)
+  )].sort((a, b) => a.localeCompare(b));
+
+  return listaCanais.length;
 }
 
-/* MOSTRAR CATEGORIAS */
-function mostrarCategorias() {
+async function abrirTV() {
+  home.classList.remove('active');
+  playerScreen.classList.remove('active');
+  tvScreen.classList.add('active');
+
   telaAtual = 'categorias';
+  pageTitle.textContent = 'TV ao vivo';
+  panelTitle.textContent = 'CATEGORIAS';
+  status.textContent = 'Carregando listas de canais...';
+
   channels.innerHTML = '';
 
+  const total = await carregarListas();
+
+  if (total === 0) {
+    status.textContent =
+      'Nenhum canal encontrado. Verifique os arquivos M3U8.';
+    return;
+  }
+
+  status.textContent = total + ' canais carregados';
+
+  mostrarCategorias();
+}
+
+function mostrarCategorias() {
+  telaAtual = 'categorias';
   panelTitle.textContent = 'CATEGORIAS';
-  pageTitle.textContent = 'TV AO VIVO';
+  pageTitle.textContent = 'Categorias';
 
-  categorias.forEach((categoria) => {
+  channels.innerHTML = '';
+
+  categorias.forEach(categoria => {
     const botao = document.createElement('button');
+    botao.textContent = '📁 ' + categoria;
+    botao.className = 'channel-button';
 
-    botao.className = 'channel';
-    botao.textContent = '📂 ' + categoria;
-
-    botao.addEventListener('click', () => {
+    botao.onclick = () => {
       categoriaAtual = categoria;
       paginaAtual = 0;
       carregarPagina();
-    });
+    };
 
     channels.appendChild(botao);
   });
 
-  const primeiro = channels.querySelector('.channel');
+  status.textContent = categorias.length + ' categorias';
+
+  const primeiro = channels.querySelector('button');
   if (primeiro) primeiro.focus();
 }
 
-/* CARREGAR SOMENTE UMA PÁGINA DA CATEGORIA */
-async function carregarPagina() {
+function carregarPagina() {
   telaAtual = 'canais';
+  panelTitle.textContent = categoriaAtual;
+  pageTitle.textContent = categoriaAtual;
+
   channels.innerHTML = '';
 
-  panelTitle.textContent = categoriaAtual;
-  pageTitle.textContent = 'TV AO VIVO';
-
-  status.textContent = 'Carregando canais...';
+  const encontrados = listaCanais.filter(
+    canal => canal.categoria === categoriaAtual
+  );
 
   const inicio = paginaAtual * TAMANHO_PAGINA;
-  const fim = inicio + TAMANHO_PAGINA;
+  const pagina = encontrados.slice(
+    inicio,
+    inicio + TAMANHO_PAGINA
+  );
 
-  let quantidade = 0;
-  const resultados = [];
+  const voltar = document.createElement('button');
+  voltar.textContent = '⬅ Voltar às categorias';
+  voltar.onclick = mostrarCategorias;
+  channels.appendChild(voltar);
 
-  try {
-    for (const arquivo of arquivos) {
-      let info = null;
+  pagina.forEach(canal => {
+    const botao = document.createElement('button');
+    botao.textContent = '📺 ' + canal.nome;
+    botao.className = 'channel-button';
 
-      await lerLinhas(arquivo, (linhaOriginal) => {
-        const linha = linhaOriginal.trim();
+    botao.onclick = () => abrirPlayer(canal);
 
-        if (linha.startsWith('#EXTINF:')) {
-          info = interpretarExtinf(linha);
-          return;
-        }
+    channels.appendChild(botao);
+  });
 
-        if (
-          linha &&
-          !linha.startsWith('#') &&
-          /^https?:\/\//i.test(linha)
-        ) {
-          if (info && info.categoria === categoriaAtual) {
-            if (quantidade >= inicio && quantidade < fim) {
-              resultados.push({
-                nome: info.nome,
-                url: linha
-              });
-            }
+  const totalPaginas = Math.ceil(
+    encontrados.length / TAMANHO_PAGINA
+  );
 
-            quantidade++;
-          }
-
-          info = null;
-        }
-      });
-    }
-
-    /* BOTÃO PARA VOLTAR ÀS CATEGORIAS */
-    const voltar = document.createElement('button');
-    voltar.className = 'channel';
-    voltar.textContent = '← Voltar às categorias';
-    voltar.addEventListener('click', mostrarCategorias);
-    channels.appendChild(voltar);
-
-    /* MOSTRAR CANAIS DA PÁGINA */
-    resultados.forEach((canal) => {
-      const botao = document.createElement('button');
-
-      botao.className = 'channel';
-      botao.textContent = canal.nome;
-
-      botao.addEventListener('click', () => {
-        abrirPlayer(canal.url, canal.nome);
-      });
-
-      channels.appendChild(botao);
-    });
-
-    /* NAVEGAÇÃO ENTRE PÁGINAS */
-    const navegacao = document.createElement('div');
-    navegacao.style.display = 'flex';
-    navegacao.style.gap = '10px';
-    navegacao.style.marginTop = '15px';
-
-    if (paginaAtual > 0) {
-      const anterior = document.createElement('button');
-      anterior.className = 'channel nav-button';
-      anterior.textContent = '← Anterior';
-
-      anterior.addEventListener('click', () => {
-        paginaAtual--;
-        carregarPagina();
-      });
-
-      navegacao.appendChild(anterior);
-    }
-
-    if (quantidade > fim) {
-      const proxima = document.createElement('button');
-      proxima.className = 'channel nav-button';
-      proxima.textContent = 'Próxima →';
-
-      proxima.addEventListener('click', () => {
-        paginaAtual++;
-        carregarPagina();
-      });
-
-      navegacao.appendChild(proxima);
-    }
-
-    channels.appendChild(navegacao);
-
-    status.textContent =
-      `${quantidade} canal(is) nesta categoria. Página ${paginaAtual + 1}.`;
-
-    const primeiroCanal = channels.querySelector('.channel');
-    if (primeiroCanal) primeiroCanal.focus();
-
-  } catch (erro) {
-    console.error(erro);
-    status.textContent = 'Erro ao carregar os canais.';
+  if (paginaAtual > 0) {
+    const anterior = document.createElement('button');
+    anterior.textContent = '⬅ Página anterior';
+    anterior.onclick = () => {
+      paginaAtual--;
+      carregarPagina();
+    };
+    channels.appendChild(anterior);
   }
+
+  if (paginaAtual + 1 < totalPaginas) {
+    const proxima = document.createElement('button');
+    proxima.textContent = 'Próxima página ➡';
+    proxima.onclick = () => {
+      paginaAtual++;
+      carregarPagina();
+    };
+    channels.appendChild(proxima);
+  }
+
+  status.textContent =
+    encontrados.length + ' canais | Página ' +
+    (paginaAtual + 1) + ' de ' + totalPaginas;
+
+  const primeiroCanal = channels.querySelectorAll('button')[1];
+  if (primeiroCanal) primeiroCanal.focus();
 }
 
-/* ABRIR TV */
-async function abrirTV() {
-  home.classList.add('hidden');
-  tvScreen.style.display = 'block';
+function abrirPlayer(canal) {
+  tvScreen.classList.remove('active');
+  playerScreen.classList.add('active');
 
-  if (!categoriasCarregadas) {
-    await carregarCategorias();
-  } else {
-    mostrarCategorias();
-  }
-}
+  telaAtual = 'player';
+  pageTitle.textContent = canal.nome;
+  document.getElementById('player-title').textContent =
+    canal.nome;
 
-/* PLAYER */
-function abrirPlayer(url, nome) {
-  status.textContent = `Abrindo: ${nome}`;
+  playerMessage.textContent = 'Abrindo canal...';
 
-  playerScreen.style.display = 'block';
-  playerMessage.classList.remove('hidden');
-  playerMessage.textContent = `Carregando: ${nome}`;
-
-  video.src = url;
+  video.src = canal.url;
   video.load();
 
-  video.play()
-    .then(() => {
-      playerMessage.classList.add('hidden');
-      status.textContent = `Assistindo: ${nome}`;
-    })
-    .catch((erro) => {
-      console.error(erro);
-      playerMessage.textContent =
-        'Não foi possível reproduzir este canal.';
-      status.textContent = 'Erro ao reproduzir o canal.';
-    });
+  video.play().then(() => {
+    playerMessage.textContent = canal.nome;
+  }).catch(() => {
+    playerMessage.textContent =
+      'Não foi possível iniciar automaticamente. Pressione Play.';
+  });
 }
 
-/* FECHAR PLAYER */
 function fecharPlayer() {
   video.pause();
   video.removeAttribute('src');
   video.load();
 
-  playerScreen.style.display = 'none';
+  playerScreen.classList.remove('active');
+  tvScreen.classList.add('active');
 
-  if (telaAtual === 'canais') {
+  if (telaAtual === 'player') {
     carregarPagina();
-  } else {
-    mostrarCategorias();
   }
-
-  status.textContent = 'TV ao vivo.';
 }
 
-/* VOLTAR AO INÍCIO */
 function voltarInicio() {
-  tvScreen.style.display = 'none';
-  home.classList.remove('hidden');
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
 
-  telaAtual = 'inicio';
-  pageTitle.textContent = 'INÍCIO';
-  status.textContent = 'ABB iniciado.';
+  tvScreen.classList.remove('active');
+  playerScreen.classList.remove('active');
+  home.classList.add('active');
+
+  telaAtual = 'home';
+  pageTitle.textContent = 'Início';
 
   document.getElementById('tv-button').focus();
 }
 
-/* FILMES E SÉRIES */
-function mostrarMensagem(categoria) {
-  status.textContent =
-    `${categoria}: catálogo ainda não configurado.`;
+function mostrarMensagem(mensagem) {
+  alert(mensagem);
 }
-
-/* NAVEGAÇÃO PELO CONTROLE REMOTO */
-document.addEventListener('keydown', (event) => {
-  const teclasVoltar = [
-    'Escape',
-    'Backspace',
-    'BrowserBack',
-    'GoBack'
-  ];
-
-  if (!teclasVoltar.includes(event.key)) return;
-
-  event.preventDefault();
-
-  if (playerScreen.style.display === 'block') {
-    fecharPlayer();
-    return;
-  }
-
-  if (tvScreen.style.display === 'block') {
-    if (telaAtual === 'canais') {
-      mostrarCategorias();
-    } else {
-      voltarInicio();
-    }
-  }
-});
 
 document.getElementById('tv-button')
   .addEventListener('click', abrirTV);
 
+document.addEventListener('keydown', function(event) {
+  if (
+    event.key === 'Escape' ||
+    event.key === 'Backspace' ||
+    event.key === 'BrowserBack' ||
+    event.key === 'GoBack'
+  ) {
+    event.preventDefault();
+
+    if (playerScreen.classList.contains('active')) {
+      fecharPlayer();
+    } else if (tvScreen.classList.contains('active')) {
+      if (telaAtual === 'canais') {
+        mostrarCategorias();
+      } else {
+        voltarInicio();
+      }
+    }
+  }
+});
+
 document.getElementById('tv-button').focus();
 </script>
+
+</body>
+</html>
