@@ -49,11 +49,7 @@ manifest = manifest
   );
 
 if (!manifest.includes('android:banner=')) {
-  manifest = manifest.replace(
-    '<application',
-    '<application android:banner="@drawable/abb_tv_cover"'
-  );
-}
+  manifest = manifest.replace('<application', '<application android:banner="@drawable/abb_tv_cover" android:usesCleartextTraffic="true"');
 
 // Registra a tela nativa do reprodutor.
 if (!manifest.includes('AbbPlayerActivity')) {
