@@ -1,255 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABB IPTV</title>
-
-<style>
-:root {
-  --bg: #0d0b14;
-  --panel: #171322;
-  --panel-light: #211b30;
-  --lilac: #c7a6ff;
-  --mint: #8ff0c4;
-  --text: #ffffff;
-  --muted: #aaa4b8;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
-
-/* CABEÇALHO */
-header {
-  height: 100px;
-  padding: 0 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--panel);
-  border-bottom: 2px solid var(--lilac);
-}
-
-.logo {
-  color: var(--lilac);
-  font-size: 34px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.page-title {
-  color: var(--mint);
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* TELA INICIAL */
-#home {
-  padding: 45px 5%;
-}
-
-.welcome {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 18px;
-}
-
-.home-menu {
-  display: flex;
-  gap: 22px;
-  margin-top: 45px;
-}
-
-.home-item {
-  width: 260px;
-  height: 160px;
-  padding: 25px;
-  background: var(--panel);
-  border: 3px solid transparent;
-  border-radius: 16px;
-  color: white;
-  font-size: 22px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.home-item span {
-  display: block;
-  font-size: 38px;
-  margin-bottom: 14px;
-}
-
-.home-item:focus {
-  outline: none;
-  border-color: var(--mint);
-  background: var(--panel-light);
-  transform: scale(1.04);
-}
-
-/* LISTA DE CANAIS */
-#tv-screen {
-  display: none;
-  height: calc(100vh - 100px);
-  padding: 25px 4%;
-}
-
-.tv-layout {
-  height: 100%;
-}
-
-.channel-panel {
-  width: 100%;
-  height: 100%;
-  background: var(--panel);
-  border-radius: 16px;
-  padding: 18px;
-  overflow-y: auto;
-}
-
-.panel-title {
-  color: var(--lilac);
-  font-size: 20px;
-  font-weight: bold;
-  padding: 8px 10px 18px;
-  border-bottom: 1px solid #393047;
-}
-
-#channels {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 14px;
-}
-
-.channel {
-  width: 100%;
-  padding: 18px;
-  background: transparent;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  color: white;
-  text-align: left;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.channel:focus {
-  outline: none;
-  border-color: var(--mint);
-  background: #242035;
-}
-
-/* PLAYER EM TELA CHEIA */
-#player-screen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000;
-  z-index: 10000;
-}
-
-#video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #000;
-}
-
-/* MENSAGEM DO PLAYER */
-#player-message {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  font-size: 20px;
-  z-index: 1;
-}
-
-#video {
-  position: relative;
-  z-index: 2;
-}
-
-/* STATUS */
-#status {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  color: var(--muted);
-  font-size: 14px;
-  z-index: 20;
-}
-
-.hidden {
-  display: none !important;
-}
-</style>
-</head>
-
-<body>
-
-<header id="header">
-  <div class="logo">ABB IPTV</div>
-  <div class="page-title" id="page-title">INÍCIO</div>
-</header>
-
-<!-- TELA INICIAL -->
-<main id="home">
-  <div class="welcome">Bem-vindo ao ABB</div>
-  <div class="subtitle">Selecione uma categoria para começar.</div>
-
-  <div class="home-menu">
-    <button class="home-item" id="tv-button">
-      <span>📺</span>
-      TV ao vivo
-    </button>
-
-    <button class="home-item" onclick="mostrarMensagem('Filmes')">
-      <span>🎬</span>
-      Filmes
-    </button>
-
-    <button class="home-item" onclick="mostrarMensagem('Séries')">
-      <span>📚</span>
-      Séries
-    </button>
-  </div>
-</main>
-
-<!-- TELA DA LISTA -->
-<main id="tv-screen">
-  <div class="tv-layout">
-    <aside class="channel-panel">
-      <div class="panel-title">CANAIS</div>
-      <div id="channels"></div>
-    </aside>
-  </div>
-</main>
-
-<!-- PLAYER EM TELA CHEIA -->
-<div id="player-screen">
-  <div id="player-message">Carregando canal...</div>
-  <video id="video" controls autoplay></video>
-</div>
-
-<div id="status">ABB iniciado.</div>
 
 <script>
 const home = document.getElementById('home');
@@ -260,88 +8,279 @@ const pageTitle = document.getElementById('page-title');
 const status = document.getElementById('status');
 const video = document.getElementById('video');
 const playerMessage = document.getElementById('player-message');
+const panelTitle = document.querySelector('.panel-title');
 
-let canaisCarregados = false;
+const arquivos = [
+  'CanaisBR01.m3u8',
+  'CanaisBR02.m3u8'
+];
 
-document.getElementById('tv-button').addEventListener('click', abrirTV);
+const TAMANHO_PAGINA = 50;
 
-/* ABRIR LISTA DE CANAIS */
-async function abrirTV() {
-  home.classList.add('hidden');
-  tvScreen.style.display = 'block';
-  pageTitle.textContent = 'TV AO VIVO';
+let categorias = [];
+let categoriaAtual = '';
+let paginaAtual = 0;
+let telaAtual = 'inicio';
+let categoriasCarregadas = false;
 
-  if (!canaisCarregados) {
-    await carregarCanais();
+/* LEITURA DA PLAYLIST EM BLOCOS */
+async function lerLinhas(arquivo, callback) {
+  const resposta = await fetch(arquivo);
+
+  if (!resposta.ok) {
+    throw new Error('Não foi possível abrir ' + arquivo);
   }
 
-  const primeiroCanal = document.querySelector('.channel');
-  if (primeiroCanal) {
-    primeiroCanal.focus();
+  if (!resposta.body) {
+    const texto = await resposta.text();
+    texto.split(/\r?\n/).forEach(callback);
+    return;
+  }
+
+  const leitor = resposta.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { value, done } = await leitor.read();
+
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+
+    const linhas = buffer.split(/\r?\n/);
+    buffer = linhas.pop();
+
+    linhas.forEach(callback);
+  }
+
+  buffer += decoder.decode();
+
+  if (buffer.trim()) {
+    callback(buffer);
   }
 }
 
-/* CARREGAR LISTA M3U */
-async function carregarCanais() {
-  status.textContent = 'Carregando canais...';
+/* INTERPRETAR INFORMAÇÕES DO CANAL */
+function interpretarExtinf(linha) {
+  const virgula = linha.indexOf(',');
+  const nome = virgula >= 0
+    ? linha.substring(virgula + 1).trim()
+    : 'Canal';
+
+  const grupo = linha.match(/group-title="([^"]*)"/i);
+
+  return {
+    nome: nome || 'Canal',
+    categoria: grupo && grupo[1].trim()
+      ? grupo[1].trim()
+      : 'Outros'
+  };
+}
+
+/* CARREGAR CATEGORIAS DOS DOIS ARQUIVOS */
+async function carregarCategorias() {
+  status.textContent = 'Lendo categorias...';
+
+  const encontrados = new Set();
 
   try {
-    const resposta = await fetch('channels.m3u');
+    for (const arquivo of arquivos) {
+      let info = null;
 
-    if (!resposta.ok) {
-      throw new Error('Lista não encontrada');
+      await lerLinhas(arquivo, (linhaOriginal) => {
+        const linha = linhaOriginal.trim();
+
+        if (linha.startsWith('#EXTINF:')) {
+          info = interpretarExtinf(linha);
+          return;
+        }
+
+        if (
+          linha &&
+          !linha.startsWith('#') &&
+          /^https?:\/\//i.test(linha)
+        ) {
+          if (info) {
+            encontrados.add(info.categoria);
+          }
+
+          info = null;
+        }
+      });
     }
 
-    const texto = await resposta.text();
-    const linhas = texto.split(/\r?\n/);
+    categorias = [...encontrados].sort();
+    categoriasCarregadas = true;
 
-    let nome = '';
-    let quantidade = 0;
+    mostrarCategorias();
 
-    for (const linhaOriginal of linhas) {
-      const linha = linhaOriginal.trim();
-
-      if (linha.startsWith('#EXTINF:')) {
-        nome = linha.split(',').pop().trim();
-        continue;
-      }
-
-      if (
-        linha &&
-        !linha.startsWith('#') &&
-        /^https?:\/\//i.test(linha)
-      ) {
-        const botao = document.createElement('button');
-
-        botao.className = 'channel';
-        botao.textContent = nome || 'Canal';
-
-        const url = linha;
-
-        botao.addEventListener('click', () => {
-          abrirPlayer(url, botao.textContent);
-        });
-
-        channels.appendChild(botao);
-
-        nome = '';
-        quantidade++;
-      }
-    }
-
-    canaisCarregados = true;
-
-    status.textContent = quantidade
-      ? `${quantidade} canal(is) carregado(s).`
-      : 'Nenhum canal configurado.';
+    status.textContent =
+      `${categorias.length} categoria(s) encontrada(s).`;
 
   } catch (erro) {
     console.error(erro);
-    status.textContent = 'Erro ao carregar a lista de canais.';
+    status.textContent =
+      'Erro ao ler as playlists. Verifique os arquivos na pasta www.';
   }
 }
 
-/* ABRIR VÍDEO EM TELA CHEIA */
+/* MOSTRAR CATEGORIAS */
+function mostrarCategorias() {
+  telaAtual = 'categorias';
+  channels.innerHTML = '';
+
+  panelTitle.textContent = 'CATEGORIAS';
+  pageTitle.textContent = 'TV AO VIVO';
+
+  categorias.forEach((categoria) => {
+    const botao = document.createElement('button');
+
+    botao.className = 'channel';
+    botao.textContent = '📂 ' + categoria;
+
+    botao.addEventListener('click', () => {
+      categoriaAtual = categoria;
+      paginaAtual = 0;
+      carregarPagina();
+    });
+
+    channels.appendChild(botao);
+  });
+
+  const primeiro = channels.querySelector('.channel');
+  if (primeiro) primeiro.focus();
+}
+
+/* CARREGAR SOMENTE UMA PÁGINA DA CATEGORIA */
+async function carregarPagina() {
+  telaAtual = 'canais';
+  channels.innerHTML = '';
+
+  panelTitle.textContent = categoriaAtual;
+  pageTitle.textContent = 'TV AO VIVO';
+
+  status.textContent = 'Carregando canais...';
+
+  const inicio = paginaAtual * TAMANHO_PAGINA;
+  const fim = inicio + TAMANHO_PAGINA;
+
+  let quantidade = 0;
+  const resultados = [];
+
+  try {
+    for (const arquivo of arquivos) {
+      let info = null;
+
+      await lerLinhas(arquivo, (linhaOriginal) => {
+        const linha = linhaOriginal.trim();
+
+        if (linha.startsWith('#EXTINF:')) {
+          info = interpretarExtinf(linha);
+          return;
+        }
+
+        if (
+          linha &&
+          !linha.startsWith('#') &&
+          /^https?:\/\//i.test(linha)
+        ) {
+          if (info && info.categoria === categoriaAtual) {
+            if (quantidade >= inicio && quantidade < fim) {
+              resultados.push({
+                nome: info.nome,
+                url: linha
+              });
+            }
+
+            quantidade++;
+          }
+
+          info = null;
+        }
+      });
+    }
+
+    /* BOTÃO PARA VOLTAR ÀS CATEGORIAS */
+    const voltar = document.createElement('button');
+    voltar.className = 'channel';
+    voltar.textContent = '← Voltar às categorias';
+    voltar.addEventListener('click', mostrarCategorias);
+    channels.appendChild(voltar);
+
+    /* MOSTRAR CANAIS DA PÁGINA */
+    resultados.forEach((canal) => {
+      const botao = document.createElement('button');
+
+      botao.className = 'channel';
+      botao.textContent = canal.nome;
+
+      botao.addEventListener('click', () => {
+        abrirPlayer(canal.url, canal.nome);
+      });
+
+      channels.appendChild(botao);
+    });
+
+    /* NAVEGAÇÃO ENTRE PÁGINAS */
+    const navegacao = document.createElement('div');
+    navegacao.style.display = 'flex';
+    navegacao.style.gap = '10px';
+    navegacao.style.marginTop = '15px';
+
+    if (paginaAtual > 0) {
+      const anterior = document.createElement('button');
+      anterior.className = 'channel nav-button';
+      anterior.textContent = '← Anterior';
+
+      anterior.addEventListener('click', () => {
+        paginaAtual--;
+        carregarPagina();
+      });
+
+      navegacao.appendChild(anterior);
+    }
+
+    if (quantidade > fim) {
+      const proxima = document.createElement('button');
+      proxima.className = 'channel nav-button';
+      proxima.textContent = 'Próxima →';
+
+      proxima.addEventListener('click', () => {
+        paginaAtual++;
+        carregarPagina();
+      });
+
+      navegacao.appendChild(proxima);
+    }
+
+    channels.appendChild(navegacao);
+
+    status.textContent =
+      `${quantidade} canal(is) nesta categoria. Página ${paginaAtual + 1}.`;
+
+    const primeiroCanal = channels.querySelector('.channel');
+    if (primeiroCanal) primeiroCanal.focus();
+
+  } catch (erro) {
+    console.error(erro);
+    status.textContent = 'Erro ao carregar os canais.';
+  }
+}
+
+/* ABRIR TV */
+async function abrirTV() {
+  home.classList.add('hidden');
+  tvScreen.style.display = 'block';
+
+  if (!categoriasCarregadas) {
+    await carregarCategorias();
+  } else {
+    mostrarCategorias();
+  }
+}
+
+/* PLAYER */
 function abrirPlayer(url, nome) {
   status.textContent = `Abrindo: ${nome}`;
 
@@ -365,7 +304,7 @@ function abrirPlayer(url, nome) {
     });
 }
 
-/* FECHAR PLAYER E VOLTAR PARA A LISTA */
+/* FECHAR PLAYER */
 function fecharPlayer() {
   video.pause();
   video.removeAttribute('src');
@@ -373,19 +312,21 @@ function fecharPlayer() {
 
   playerScreen.style.display = 'none';
 
-  const primeiroCanal = document.querySelector('.channel');
-  if (primeiroCanal) {
-    primeiroCanal.focus();
+  if (telaAtual === 'canais') {
+    carregarPagina();
+  } else {
+    mostrarCategorias();
   }
 
-  status.textContent = 'Lista de canais.';
+  status.textContent = 'TV ao vivo.';
 }
 
-/* VOLTAR PARA A TELA INICIAL */
+/* VOLTAR AO INÍCIO */
 function voltarInicio() {
   tvScreen.style.display = 'none';
   home.classList.remove('hidden');
 
+  telaAtual = 'inicio';
   pageTitle.textContent = 'INÍCIO';
   status.textContent = 'ABB iniciado.';
 
@@ -398,7 +339,7 @@ function mostrarMensagem(categoria) {
     `${categoria}: catálogo ainda não configurado.`;
 }
 
-/* BOTÃO VOLTAR */
+/* NAVEGAÇÃO PELO CONTROLE REMOTO */
 document.addEventListener('keydown', (event) => {
   const teclasVoltar = [
     'Escape',
@@ -407,26 +348,26 @@ document.addEventListener('keydown', (event) => {
     'GoBack'
   ];
 
-  if (!teclasVoltar.includes(event.key)) {
-    return;
-  }
+  if (!teclasVoltar.includes(event.key)) return;
 
   event.preventDefault();
 
-  /* Se o vídeo está aberto: volta para a lista */
   if (playerScreen.style.display === 'block') {
     fecharPlayer();
     return;
   }
 
-  /* Se a lista está aberta: volta para o início */
   if (tvScreen.style.display === 'block') {
-    voltarInicio();
+    if (telaAtual === 'canais') {
+      mostrarCategorias();
+    } else {
+      voltarInicio();
+    }
   }
 });
 
+document.getElementById('tv-button')
+  .addEventListener('click', abrirTV);
+
 document.getElementById('tv-button').focus();
 </script>
-
-</body>
-</html>
