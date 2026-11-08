@@ -209,7 +209,7 @@ public class AbbPlayerActivity extends Activity {
             public void onPlayerError(PlaybackException error) {
                 Toast.makeText(
                     AbbPlayerActivity.this,
-                    "Falha na reprodução: " + error.errorCodeName,
+                    "Falha na reprodução: " + error.getErrorCodeName(),
                     Toast.LENGTH_LONG
                 ).show();
             }
