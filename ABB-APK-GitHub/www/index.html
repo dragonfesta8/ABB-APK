@@ -7,48 +7,63 @@
 
 <style>
 :root {
-  --bg: #0d0b14;
-  --panel: #171322;
-  --panel-light: #211b30;
-  --lilac: #c7a6ff;
+  --bg: #0b0913;
+  --panel: #15111f;
+  --panel-light: #211a30;
+  --panel-hover: #302442;
+  --purple: #a875ff;
+  --purple-light: #c7a6ff;
   --mint: #8ff0c4;
   --white: #ffffff;
   --muted: #aaa2b8;
+  --border: rgba(199,166,255,.13);
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
+  min-height: 100%;
   background: var(--bg);
   color: var(--white);
   font-family: Arial, sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 header {
-  padding: 22px;
-  background: var(--panel);
-  border-bottom: 2px solid var(--lilac);
+  height: 76px;
+  padding: 0 34px;
+  background: rgba(15,12,23,.96);
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
-  font-size: 25px;
-  font-weight: bold;
-  color: var(--lilac);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--purple-light);
 }
 
 #page-title {
-  color: var(--mint);
-  font-size: 18px;
+  color: var(--muted);
+  font-size: 15px;
 }
 
 main {
-  padding: 24px;
+  padding: 30px 38px 45px;
+  max-width: 1600px;
+  margin: auto;
 }
 
 .screen {
@@ -57,82 +72,166 @@ main {
 
 .screen.active {
   display: block;
+  animation: aparecer .25s ease;
 }
 
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tela inicial */
+
 .home-title {
-  font-size: 26px;
-  margin-bottom: 25px;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.home-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 26px;
+}
+
+.hero {
+  min-height: 290px;
+  padding: 38px;
+  margin-bottom: 35px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(168,117,255,.35), transparent 35%),
+    linear-gradient(110deg, #21152f 0%, #171124 55%, #302044 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-label {
+  color: var(--mint);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  max-width: 550px;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.08;
+  margin: 0 0 14px;
+}
+
+.hero p {
+  color: #c4bbd2;
+  max-width: 480px;
+  line-height: 1.6;
+  margin: 0 0 23px;
+}
+
+.hero button {
+  width: fit-content;
+  min-width: 190px;
+  background: var(--purple);
+  color: #160e22;
+  border: none;
+}
+
+.section-heading {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 0 0 17px;
 }
 
 .menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
 button {
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 19px;
   background: var(--panel-light);
-  color: white;
-  font-size: 17px;
+  color: var(--white);
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   text-align: left;
+  transition: transform .18s, background .18s, border-color .18s;
 }
 
 button:focus {
   outline: none;
-  border-color: var(--mint);
-  background: #352849;
-  transform: scale(1.02);
+  border: 2px solid var(--mint);
+  background: var(--panel-hover);
+  transform: scale(1.035);
+  box-shadow: 0 0 22px rgba(143,240,196,.13);
 }
 
 .menu button {
-  min-height: 115px;
-  font-size: 20px;
-  color: var(--lilac);
+  min-height: 125px;
+  font-size: 19px;
+  color: var(--purple-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.menu button::after {
+  content: "Explorar  →";
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: normal;
+}
+
+/* Categorias e canais */
+
 .panel-title {
-  font-size: 21px;
-  color: var(--mint);
-  margin-bottom: 18px;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--white);
+  margin: 5px 0 23px;
 }
 
 #channels {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 15px;
 }
 
 .channel-button {
-  min-height: 70px;
+  min-height: 82px;
   font-size: 15px;
+  line-height: 1.35;
+  background: linear-gradient(145deg, #211a30, #171321);
+  border-radius: 14px;
+  overflow-wrap: anywhere;
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.actions button {
-  font-size: 14px;
+#channels button:first-child {
+  color: var(--mint);
 }
 
 #status {
   color: var(--muted);
-  margin-top: 18px;
+  margin-top: 24px;
+  font-size: 14px;
 }
 
-#video {
-  width: 100%;
-  max-height: 70vh;
-  background: black;
-  border-radius: 12px;
+/* Player */
+
+#player-screen {
+  max-width: 1100px;
+  margin: auto;
+}
+
+#player-title {
+  font-size: 24px;
+  color: var(--purple-light);
 }
 
 #player-message {
@@ -140,9 +239,74 @@ button:focus {
   color: var(--mint);
 }
 
-@media (min-width: 800px) {
+#video {
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.actions button {
+  min-width: 140px;
+}
+
+/* Telas menores */
+
+@media (max-width: 700px) {
+  header {
+    height: 65px;
+    padding: 0 18px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
   main {
-    padding: 35px;
+    padding: 22px 17px 35px;
+  }
+
+  .hero {
+    min-height: 250px;
+    padding: 25px;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .menu button {
+    min-height: 90px;
+  }
+
+  #channels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .channel-button {
+    min-height: 75px;
+    padding: 13px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1100px) {
+  main {
+    padding-top: 38px;
+  }
+
+  #channels {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
 </style>
@@ -158,17 +322,34 @@ button:focus {
 <main>
 
 <section id="home" class="screen active">
-  <div class="home-title">Bem-vindo ao ABB IPTV</div>
+
+  <div class="home-title">Bem-vindo ao ABB</div>
+  <div class="home-subtitle">Seu entretenimento em um só lugar.</div>
+
+  <div class="hero">
+    <div class="hero-label">ABB IPTV ORIGINAL</div>
+    <h1>Seu mundo de entretenimento.</h1>
+    <p>
+      Acesse seus canais ao vivo e aproveite sua programação
+      em uma experiência simples e moderna.
+    </p>
+    <button id="tv-button">▶ ASSISTIR AGORA</button>
+  </div>
+
+  <div class="section-heading">Explore o ABB</div>
 
   <div class="menu">
-    <button id="tv-button">📺 TV AO VIVO</button>
+    <button onclick="abrirTV()">📺 TV AO VIVO</button>
+
     <button onclick="mostrarMensagem('Filmes em desenvolvimento')">
       🎬 FILMES
     </button>
+
     <button onclick="mostrarMensagem('Séries em desenvolvimento')">
       📁 SÉRIES
     </button>
   </div>
+
 </section>
 
 <section id="tv-screen" class="screen">
