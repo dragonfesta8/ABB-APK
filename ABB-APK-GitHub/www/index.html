@@ -309,67 +309,213 @@ button:focus {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
+  /* Layout com barra lateral */
+
+.app-layout {
+  display: flex;
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  width: 225px;
+  flex-shrink: 0;
+  padding: 28px 17px;
+  background: #100d19;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-title {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 12px 12px 18px;
+}
+
+/* Botões modernos da barra lateral */
+
+.sidebar button {
+  position: relative;
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  transition: .2s ease;
+}
+
+.sidebar button:hover,
+.sidebar button:focus,
+.sidebar button.active {
+  background: linear-gradient(
+    90deg,
+    rgba(168,117,255,.20),
+    rgba(168,117,255,.05)
+  );
+  color: var(--purple-light);
+  border-color: rgba(168,117,255,.25);
+  box-shadow: 0 0 16px rgba(168,117,255,.08);
+}
+
+.sidebar button.active::before {
+  content: "";
+  position: absolute;
+  left: -17px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 5px;
+  background: var(--purple);
+}
+
+.sidebar button:focus {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}
+
+.app-layout main {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .sidebar button {
+    min-width: 105px;
+    margin: 0;
+    padding: 13px 10px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .app-layout main {
+    padding: 22px 17px 35px;
+  }
+}
+  
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">ABB IPTV</div>
-  <div id="page-title">Início</div>
+  <div class="header-brand">
+    <div class="logo-icon">ABB</div>
+    <div class="brand-info">
+      <div class="logo">ABB IPTV</div>
+      <div class="brand-subtitle">ENTRETENIMENTO DIGITAL</div>
+    </div>
+  </div>
+
+  <div class="header-page">
+    <span class="header-indicator"></span>
+    <span id="page-title">Início</span>
+  </div>
 </header>
 
-<main>
+<div class="app-layout">
 
-<section id="home" class="screen active">
+  <aside class="sidebar">
+   <button id="nav-home" class="active" onclick="voltarInicio()">
+  🏠 INÍCIO
+</button>
 
-  <div class="home-title">Bem-vindo ao ABB</div>
-  <div class="home-subtitle">Seu entretenimento em um só lugar.</div>
+<button id="nav-tv" onclick="abrirTV()">
+  📺 TV AO VIVO
+</button>
 
-  <div class="hero">
-    <div class="hero-label">ABB IPTV ORIGINAL</div>
-    <h1>Seu mundo de entretenimento.</h1>
-    <p>
-      Acesse seus canais ao vivo e aproveite sua programação
-      em uma experiência simples e moderna.
-    </p>
-    <button id="tv-button">▶ ASSISTIR AGORA</button>
-  </div>
+<button id="nav-movies" onclick="mostrarMensagem('Filmes em desenvolvimento')">
+  🎬 FILMES
+</button>
 
-  <div class="section-heading">Explore o ABB</div>
+<button id="nav-series" onclick="mostrarMensagem('Séries em desenvolvimento')">
+  📁 SÉRIES
+</button>
+  </aside>
 
-  <div class="menu">
-    <button onclick="abrirTV()">📺 TV AO VIVO</button>
+  <main>
 
-    <button onclick="mostrarMensagem('Filmes em desenvolvimento')">
-      🎬 FILMES
-    </button>
+    <section id="home" class="screen active">
 
-    <button onclick="mostrarMensagem('Séries em desenvolvimento')">
-      📁 SÉRIES
-    </button>
-  </div>
+      <div class="home-title">Bem-vindo ao ABB,BY BRUNO DOS SANTOS</div>
+      <div class="home-subtitle">
+        Seu entretenimento em um só lugar.
+      </div>
 
-</section>
+      <div class="hero">
+        <div class="hero-label">ABB IPTV ORIGINAL</div>
+        <h1>Seu mundo de entretenimento.</h1>
+        <p>
+          Acesse seus canais ao vivo e aproveite sua programação
+          em uma experiência simples e moderna.
+        </p>
+        <button id="tv-button">▶ ASSISTIR AGORA</button>
+      </div>
 
-<section id="tv-screen" class="screen">
-  <div class="panel-title">CANAIS</div>
-  <div id="channels"></div>
-  <div id="status">Carregando...</div>
-</section>
+      <div class="section-heading">Explore o ABB</div>
 
-<section id="player-screen" class="screen">
-  <div class="panel-title" id="player-title">REPRODUTOR</div>
-  <div id="player-message">Carregando canal...</div>
-  <video id="video" controls autoplay playsinline></video>
+      <div class="menu">
+        <button onclick="abrirTV()">📺 TV AO VIVO</button>
 
-  <div class="actions">
-    <button onclick="fecharPlayer()">⬅ Voltar</button>
-  </div>
-</section>
+        <button onclick="mostrarMensagem('Filmes em desenvolvimento')">
+          🎬 FILMES
+        </button>
 
-</main>
+        <button onclick="mostrarMensagem('Séries em desenvolvimento')">
+          📁 SÉRIES
+        </button>
+      </div>
 
+    </section>
+
+    <section id="tv-screen" class="screen">
+      <div class="panel-title">CANAIS</div>
+      <div id="channels"></div>
+      <div id="status">Carregando...</div>
+    </section>
+
+    <section id="player-screen" class="screen">
+      <div class="panel-title" id="player-title">REPRODUTOR</div>
+      <div id="player-message">Carregando canal...</div>
+      <video id="video" controls autoplay playsinline></video>
+
+      <div class="actions">
+        <button onclick="fecharPlayer()">⬅ Voltar</button>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+  
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
 <script>
 const home = document.getElementById('home');
@@ -394,7 +540,18 @@ let categorias = [];
 let categoriaAtual = '';
 let paginaAtual = 0;
 let telaAtual = 'home';
+function atualizarMenuAtivo(id) {
+  document.querySelectorAll('.sidebar button').forEach(botao => {
+    botao.classList.remove('active');
+  });
 
+  const selecionado = document.getElementById(id);
+
+  if (selecionado) {
+    selecionado.classList.add('active');
+  }
+}
+  
 async function carregarListas() {
   listaCanais = [];
 
@@ -454,10 +611,12 @@ async function carregarListas() {
 }
 
 async function abrirTV() {
+  atualizarMenuAtivo('nav-tv');
+
   home.classList.remove('active');
   playerScreen.classList.remove('active');
   tvScreen.classList.add('active');
-
+  
   telaAtual = 'categorias';
   pageTitle.textContent = 'TV ao vivo';
   panelTitle.textContent = 'CATEGORIAS';
@@ -591,7 +750,9 @@ function abrirPlayer(canal) {
       'Reprodutor nativo indisponível nesta versão.';
   }
 }
-function fecharPlayer() {
+function voltarInicio() {
+  atualizarMenuAtivo('nav-home');
+
   video.pause();
 
   if (hls) {
