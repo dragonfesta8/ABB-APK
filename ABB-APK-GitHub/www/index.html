@@ -452,13 +452,9 @@ button:focus {
   📺 TV AO VIVO
 </button>
 
-<button id="nav-movies" onclick="mostrarMensagem('Filmes em desenvolvimento')">
-  🎬 FILMES
-</button>
+<button id="nav-movies" onclick="abrirFilmes()">🎬 FILMES</button>
 
-<button id="nav-series" onclick="mostrarMensagem('Séries em desenvolvimento')">
-  📁 SÉRIES
-</button>
+<button id="nav-series" onclick="abrirSeries()">📁 SÉRIES</button>
   </aside>
 
   <main>
@@ -536,11 +532,29 @@ const arquivos = [
 const TAMANHO_PAGINA = 50;
 
 let listaCanais = [];
+let listaFilmes = [];
+let listaSeries = [];
+
 let categorias = [];
+let categoriasFilmes = [];
+let categoriasSeries = [];
+  
 let categoriaAtual = '';
 let paginaAtual = 0;
 let telaAtual = 'home';
+let tipoConteudoAtual = 'canal';
 function atualizarMenuAtivo(id) {
+function obterListaAtual() {
+  if (tipoConteudoAtual === 'filme') return listaFilmes;
+  if (tipoConteudoAtual === 'serie') return listaSeries;
+  return listaCanais;
+}
+
+function obterCategoriasAtuais() {
+  if (tipoConteudoAtual === 'filme') return categoriasFilmes;
+  if (tipoConteudoAtual === 'serie') return categoriasSeries;
+  return categorias;
+}  
   document.querySelectorAll('.sidebar button').forEach(botao => {
     botao.classList.remove('active');
   });
@@ -554,6 +568,8 @@ function atualizarMenuAtivo(id) {
   
 async function carregarListas() {
   listaCanais = [];
+  listaFilmes = [];
+  listaSeries = [];
 
   for (const arquivo of arquivos) {
     try {
@@ -574,26 +590,61 @@ async function carregarListas() {
         if (linha.startsWith('#EXTINF:')) {
           const nome = linha.includes(',')
             ? linha.substring(linha.lastIndexOf(',') + 1).trim()
-            : 'Canal sem nome';
+            : 'Conteúdo sem nome';
 
           const grupo = linha.match(/group-title="([^"]*)"/i);
 
+          const categoria = grupo && grupo[1]
+            ? grupo[1].trim()
+            : 'Outros';
+
+          const grupoMaiusculo = categoria
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toUpperCase();
+
+          let tipo = 'canal';
+
+          if (grupoMaiusculo.startsWith('CANAIS')) {
+            tipo = 'canal';
+          } else if (
+            grupoMaiusculo.includes('FILMES') ||
+            grupoMaiusculo.includes('COLETANEA')
+          ) {
+           tipo = 'filme';
+          } else if (
+            grupoMaiusculo.includes('SERIES') ||
+            grupoMaiusculo.includes('SERIADOS') ||
+            grupoMaiusculo.includes('NOVELAS') ||
+            grupoMaiusculo.includes('MALHACAO')
+          ) {
+            tipo = 'serie';
+          }
+
           dados = {
-            nome: nome || 'Canal sem nome',
-            categoria: grupo && grupo[1]
-              ? grupo[1].trim()
-              : 'Outros'
+            nome: nome || 'Conteúdo sem nome',
+            categoria: categoria,
+            tipo: tipo
           };
+
         } else if (
           dados &&
           linha &&
           !linha.startsWith('#')
         ) {
-          listaCanais.push({
+          const conteudo = {
             nome: dados.nome,
             categoria: dados.categoria,
             url: linha
-          });
+          };
+
+          if (dados.tipo === 'filme') {
+            listaFilmes.push(conteudo);
+          } else if (dados.tipo === 'serie') {
+            listaSeries.push(conteudo);
+          } else {
+            listaCanais.push(conteudo);
+          }
 
           dados = null;
         }
@@ -604,39 +655,68 @@ async function carregarListas() {
   }
 
   categorias = [...new Set(
-    listaCanais.map(canal => canal.categoria)
+    listaCanais.map(item => item.categoria)
+  )].sort((a, b) => a.localeCompare(b));
+
+  categoriasFilmes = [...new Set(
+    listaFilmes.map(item => item.categoria)
+  )].sort((a, b) => a.localeCompare(b));
+
+  categoriasSeries = [...new Set(
+    listaSeries.map(item => item.categoria)
   )].sort((a, b) => a.localeCompare(b));
 
   return listaCanais.length;
 }
 
-async function abrirTV() {
-  atualizarMenuAtivo('nav-tv');
+async function abrirConteudo(tipo) {
+  tipoConteudoAtual = tipo;
+  const configuracao = {
+  canal: { menu: 'nav-tv', titulo: 'TV ao vivo', plural: 'canais' },
+  filme: { menu: 'nav-movies', titulo: 'Filmes', plural: 'filmes' },
+  serie: { menu: 'nav-series', titulo: 'Séries', plural: 'séries' }
+};
+
+const atual = configuracao[tipo];
+
+atualizarMenuAtivo(atual.menu);
 
   home.classList.remove('active');
   playerScreen.classList.remove('active');
   tvScreen.classList.add('active');
   
   telaAtual = 'categorias';
-  pageTitle.textContent = 'TV ao vivo';
+  pageTitle.textContent = atual.titulo;
   panelTitle.textContent = 'CATEGORIAS';
-  status.textContent = 'Carregando listas de canais...';
+  status.textContent = 'Carregando listas de ' + atual.plural + '...';
 
   channels.innerHTML = '';
 
-  const total = await carregarListas();
+ const totalAtual = obterListaAtual().length;
 
-  if (total === 0) {
+  if (totalAtual === 0) {
     status.textContent =
-      'Nenhum canal encontrado. Verifique os arquivos M3U8.';
+      'Nenhum conteúdo encontrado. Verifique os arquivos M3U8.';
     return;
   }
 
-  status.textContent = total + ' canais carregados';
+  status.textContent = totalAtual + ' ' + atual.plural + ' carregados';
 
   mostrarCategorias();
 }
 
+async function abrirTV() {
+  return abrirConteudo('canal');
+}
+
+async function abrirFilmes() {
+  return abrirConteudo('filme');
+}
+
+async function abrirSeries() {
+  return abrirConteudo('serie');
+}
+  
 function mostrarCategorias() {
   telaAtual = 'categorias';
   panelTitle.textContent = 'CATEGORIAS';
@@ -644,7 +724,7 @@ function mostrarCategorias() {
 
   channels.innerHTML = '';
 
-  categorias.forEach(categoria => {
+  obterCategoriasAtuais().forEach(categoria => {
     const botao = document.createElement('button');
     botao.textContent = '📁 ' + categoria;
     botao.className = 'channel-button';
@@ -671,8 +751,7 @@ function carregarPagina() {
 
   channels.innerHTML = '';
 
-  const encontrados = listaCanais.filter(
-    canal => canal.categoria === categoriaAtual
+  const encontrados = obterListaAtual().filter(canal => canal.categoria === categoriaAtual
   );
 
   const inicio = paginaAtual * TAMANHO_PAGINA;
@@ -699,7 +778,14 @@ function carregarPagina() {
   const totalPaginas = Math.ceil(
     encontrados.length / TAMANHO_PAGINA
   );
+const nomesConteudo = {
+  canal: 'canais',
+  filme: 'filmes',
+  serie: 'séries'
+};
 
+const nomeConteudo = nomesConteudo[tipoConteudoAtual];
+  
   if (paginaAtual > 0) {
     const anterior = document.createElement('button');
     anterior.textContent = '⬅ Página anterior';
@@ -721,7 +807,7 @@ function carregarPagina() {
   }
 
   status.textContent =
-    encontrados.length + ' canais | Página ' +
+    encontrados.length + ' ' + nomeConteudo + ' | Página ' +
     (paginaAtual + 1) + ' de ' + totalPaginas;
 
   const primeiroCanal = channels.querySelectorAll('button')[1];
@@ -750,9 +836,8 @@ function abrirPlayer(canal) {
       'Reprodutor nativo indisponível nesta versão.';
   }
 }
-function voltarInicio() {
-  atualizarMenuAtivo('nav-home');
-
+  
+function fecharPlayer() {
   video.pause();
 
   if (hls) {
@@ -766,11 +851,22 @@ function voltarInicio() {
   playerScreen.classList.remove('active');
   tvScreen.classList.add('active');
 
+  telaAtual = 'canais';
+  pageTitle.textContent = categoriaAtual;
+
   carregarPagina();
 }
   
 function voltarInicio() {
+  atualizarMenuAtivo('nav-home');
+
   video.pause();
+
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+
   video.removeAttribute('src');
   video.load();
 
