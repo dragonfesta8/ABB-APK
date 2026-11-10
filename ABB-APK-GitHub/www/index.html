@@ -541,17 +541,6 @@ let paginaAtual = 0;
 let telaAtual = 'home';
 let tipoConteudoAtual = 'canal';
 function atualizarMenuAtivo(id) {
-  document.querySelectorAll('.sidebar button').forEach(botao => {
-    botao.classList.remove('active');
-  });
-
-  const selecionado = document.getElementById(id);
-
-  if (selecionado) {
-    selecionado.classList.add('active');
-  }
-}
-
 function obterListaAtual() {
   if (tipoConteudoAtual === 'filme') return listaFilmes;
   if (tipoConteudoAtual === 'serie') return listaSeries;
