@@ -461,7 +461,7 @@ button:focus {
 
     <section id="home" class="screen active">
 
-      <div class="home-title">Bem-vindo ao ABB,BY BRUNO DOS SANTOS</div>
+      <div class="home-title">Bem-vindo ao ABB,DEVI BRUNO DOS SANTOS</div>
       <div class="home-subtitle">
         Seu entretenimento em um só lugar.
       </div>
@@ -481,13 +481,10 @@ button:focus {
       <div class="menu">
         <button onclick="abrirTV()">📺 TV AO VIVO</button>
 
-        <button onclick="mostrarMensagem('Filmes em desenvolvimento')">
-          🎬 FILMES
-        </button>
+        <button onclick="abrirFilmes()">🎬 FILMES</button>
 
-        <button onclick="mostrarMensagem('Séries em desenvolvimento')">
-          📁 SÉRIES
-        </button>
+        <button onclick="abrirSeries()">📁 SÉRIES</button>
+        
       </div>
 
     </section>
@@ -544,6 +541,17 @@ let paginaAtual = 0;
 let telaAtual = 'home';
 let tipoConteudoAtual = 'canal';
 function atualizarMenuAtivo(id) {
+  document.querySelectorAll('.sidebar button').forEach(botao => {
+    botao.classList.remove('active');
+  });
+
+  const selecionado = document.getElementById(id);
+
+  if (selecionado) {
+    selecionado.classList.add('active');
+  }
+}
+
 function obterListaAtual() {
   if (tipoConteudoAtual === 'filme') return listaFilmes;
   if (tipoConteudoAtual === 'serie') return listaSeries;
@@ -554,7 +562,7 @@ function obterCategoriasAtuais() {
   if (tipoConteudoAtual === 'filme') return categoriasFilmes;
   if (tipoConteudoAtual === 'serie') return categoriasSeries;
   return categorias;
-}  
+}
   document.querySelectorAll('.sidebar button').forEach(botao => {
     botao.classList.remove('active');
   });
@@ -691,8 +699,8 @@ atualizarMenuAtivo(atual.menu);
   status.textContent = 'Carregando listas de ' + atual.plural + '...';
 
   channels.innerHTML = '';
-
- const totalAtual = obterListaAtual().length;
+  await carregarListas();
+  const totalAtual = obterListaAtual().length;
 
   if (totalAtual === 0) {
     status.textContent =
@@ -720,7 +728,9 @@ async function abrirSeries() {
 function mostrarCategorias() {
   telaAtual = 'categorias';
   panelTitle.textContent = 'CATEGORIAS';
-  pageTitle.textContent = 'Categorias';
+  pageTitle.textContent =
+  tipoConteudoAtual === 'canal' ? 'TV ao vivo' :
+  tipoConteudoAtual === 'filme' ? 'Filmes' : 'Séries';
 
   channels.innerHTML = '';
 
@@ -738,7 +748,7 @@ function mostrarCategorias() {
     channels.appendChild(botao);
   });
 
-  status.textContent = categorias.length + ' categorias';
+  status.textContent = obterCategoriasAtuais().length + ' categorias';
 
   const primeiro = channels.querySelector('button');
   if (primeiro) primeiro.focus();
@@ -767,7 +777,13 @@ function carregarPagina() {
 
   pagina.forEach(canal => {
     const botao = document.createElement('button');
-    botao.textContent = '📺 ' + canal.nome;
+    const icone = tipoConteudoAtual === 'filme'
+  ? '🎬'
+  : tipoConteudoAtual === 'serie'
+    ? '📁'
+    : '📺';
+
+botao.textContent = icone + ' ' + canal.nome;
     botao.className = 'channel-button';
 
     botao.onclick = () => abrirPlayer(canal);
