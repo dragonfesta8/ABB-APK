@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ABB</title>
+<script>window.addEventListener('error',function(e){var s=document.getElementById('splash');if(!s){if(typeof toast=='function')toast('Erro: '+e.message);return}var p=document.getElementById('err');if(!p){p=document.createElement('pre');p.id='err';s.appendChild(p)}p.textContent+=(e.message||'erro')+' ('+String(e.filename||'').split('/').pop()+':'+e.lineno+')\n'});setTimeout(function(){var s=document.getElementById('splash');if(s&&!document.getElementById('err'))s.style.display='none'},20000)</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="splash"><img src="img/abb-icon.png" alt="ABB IPTV"><small>Desenvolvido por</small><h2>Dev Bruno dos Santos</h2><div class="bar"><i></i></div></div>
+<header id="nav"></header>
+<main id="app"></main>
+<div id="md"></div>
+<video id="pl" controls autoplay playsinline></video>
+<div id="tt"></div>
+<script src="js/core.js"></script>
+<script src="js/playlist.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
