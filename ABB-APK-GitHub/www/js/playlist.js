@@ -160,22 +160,6 @@ async function boot(){
   toast('Erro ao carregar o catálogo');
  }
 }
-  toast(ALL.length.toLocaleString('pt-BR')+' itens carregados');
-  go('home',1);
-
- }catch(e){
-  console.error('Falha ao montar catálogo',e);
-
-  rc(
-   $('#app'),
-   el('div','dev',
-    '⚠ Erro ao carregar catálogo: '+e.message
-   )
-  );
-
-  toast('Erro ao carregar: '+e.message);
- }
-}
 
 /* Atualização automática sem interromper a navegação atual. */
 let atualizando=false;
