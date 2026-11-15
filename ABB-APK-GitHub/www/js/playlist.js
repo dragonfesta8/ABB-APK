@@ -44,7 +44,9 @@ async function parse(txt,fonte){
 /* Baixa as listas em paralelo e preserva a última cópia da lista remota. */
 async function baixar(quieto){
  const extra=S.cfg.url||LISTA_PADRAO;
- const fontes=(S.cfg.soUrl&&extra?[]:ARQ.map(f=>['./data/'+f])).concat(extra?[[extra,null,1]]:[]).concat(S.cfg.pluto&&TV_ATIVA?[[PLUTO,'Pluto TV']]:[]);
+ const fontes=(S.cfg.soUrl&&extra?[]:ARQ.map(f=>[
+  f.startsWith('http') ? f : './data/'+f
+])).concat(extra?[[extra,null,1]]:[]).concat(S.cfg.pluto&&TV_ATIVA?[[PLUTO,'Pluto TV']]:[]);
  const resultados=await Promise.all(fontes.map(async([u,n,guarda])=>{
   try{
    const r=await fetch(u,{cache:guarda?'no-store':'default'});
