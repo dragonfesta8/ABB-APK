@@ -1,18 +1,16 @@
 const $=s=>document.querySelector(s),KEY='abb2';
 
-const ARQ=[
-  './data/MeusAnimes.m3u8',
-
-  'https://raw.githubusercontent.com/dragonfesta8/abbtv/main/ABB-APK-GitHub/www/data/CanaisBR01.m3u8',
-
-  'https://raw.githubusercontent.com/dragonfesta8/abbtv/main/ABB-APK-GitHub/www/data/CanaisBR02.m3u8'
+const $=s=>document.querySelector(s),KEY='abb2',ARQ=[
+  'https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/MeusAnimes.m3u8',
+  'https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/CanaisBR01.m3u8',
+  'https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/CanaisBR02.m3u8'
 ];
 
 let S={fav:[],list:[],hist:[],ult:{},cfg:{}},D,ALL,tab='home',HERO=null;
 try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 S.cfg=Object.assign({nome:'',adulto:false,url:'',soUrl:false,pluto:false},S.cfg);
 // Para o APK já abrir lendo a sua lista do GitHub (link "Raw"), cole o endereço aqui. Vazio = só o que for digitado em Configurações.
-const LISTA_PADRAO='https://raw.githubusercontent.com/dragonfesta8/abbtv/main/ABB-APK-GitHub/www/data/MEUSDESENHOS.m3u8';
+const LISTA_PADRAO='https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/MEUSDESENHOS.m3u8';
 // TV ao vivo desligada por enquanto: a aba mostra "Em desenvolvimento" e nenhum canal é carregado.
 // Para reativar: troque para true e devolva os arquivos de backup-canais/ para www/data/.
 const TV_ATIVA=false;
