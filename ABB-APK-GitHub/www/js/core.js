@@ -1,5 +1,4 @@
 const $=s=>document.querySelector(s),KEY='abb2';
-
 const $=s=>document.querySelector(s),KEY='abb2',ARQ=[
   'https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/MeusAnimes.m3u8',
   'https://raw.githubusercontent.com/dragonfesta8/ABB-APK/refs/heads/main/ABB-APK-GitHub/www/data/CanaisBR01.m3u8',
