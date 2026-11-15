@@ -1,1 +1,0 @@
-{"name":"abb-apk-github","version":"1.0.0","private":true,"type":"module","scripts":{"prepare:apk":"node scripts/configure.mjs","configure:tv":"node scripts/android-tv.mjs","test":"node --test tests/*.test.mjs"},"dependencies":{"@capacitor/android":"7.6.10","@capacitor/core":"7.6.10"},"devDependencies":{"@capacitor/cli":"7.6.10"}}
