@@ -1,9 +1,13 @@
-const $=s=>document.querySelector(s),KEY='abb2',ARQ=[
-'CanaisBR01.m3u8',
-'CanaisBR02.m3u8',
-'MeusAnimes.m3u8',
-'MEUSDESENHOS.m3u8'
+const $=s=>document.querySelector(s),KEY='abb2';
+
+const ARQ=[
+  './data/MeusAnimes.m3u8',
+
+  'https://raw.githubusercontent.com/dragonfesta8/abbtv/main/ABB-APK-GitHub/www/data/CanaisBR01.m3u8',
+
+  'https://raw.githubusercontent.com/dragonfesta8/abbtv/main/ABB-APK-GitHub/www/data/CanaisBR02.m3u8'
 ];
+
 let S={fav:[],list:[],hist:[],ult:{},cfg:{}},D,ALL,tab='home',HERO=null;
 try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 S.cfg=Object.assign({nome:'',adulto:false,url:'',soUrl:false,pluto:false},S.cfg);
