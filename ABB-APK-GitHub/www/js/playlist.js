@@ -85,6 +85,10 @@ async function boot(){
  try{
   const listas=await baixar();
   await montar(listas);
+  console.log('LISTAS BAIXADAS:',listas.length);
+  console.log('TOTAL DE ITENS:',ALL.length);
+  console.log('FILMES:',Object.values(D.filme).reduce((a,v)=>a+v.length,0));
+  console.log('SÉRIES:',Object.values(D.serie).reduce((a,v)=>a+v.length,0));
   assinaturaAtual=assinaturaCatalogo();
   ultAtu=Date.now();HERO=null;go('home',1);
   if(!ALL.length)toast('Nenhum conteúdo foi carregado. Verifique a internet e as listas.');
