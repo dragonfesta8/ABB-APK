@@ -109,3 +109,9 @@ function play(it,url=it.u,title=it.n){
  const v=$('#pl');v.src=url;v.style.display='block';v.play().catch(()=>toast('Formato não suportado neste navegador'));
  push(()=>{v.pause();v.removeAttribute('src');v.load();v.style.display='none'})}
 function playEp(G,x){S.ult[G.g]=x.u;play(G,x.u,G.n+' · '+eplbl(x))}
+/* ---- inicialização automática do catálogo ---- */
+if(document.readyState==='loading'){
+ document.addEventListener('DOMContentLoaded',()=>boot(),{once:true});
+}else{
+ boot();
+}
