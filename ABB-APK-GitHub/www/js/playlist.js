@@ -16,26 +16,69 @@ function addEp(m){
 async function parse(txt,fonte){
  let m=null,cont=0;
  const linhas=txt.split(/\r?\n/);
+
  for(let ix=0;ix<linhas.length;ix++){
   const l=linhas[ix].trim();
+
   if(l.startsWith('#EXTINF')){
-   const g=(/group-title="([^"]*)"/i.exec(l)||[])[1]||'Outros';
-   const lg=(/tvg-logo="(https?:[^"]*)"/i.exec(l)||[])[1]||'';
-   let i=l.lastIndexOf('",');i=i<0?l.indexOf(','):i+1;
-   const G=norm(g).replace(/^[^A-Z0-9]+/,'');let t='canal';
-   if(/AREA DO CLIENTE|PEDIDOS/.test(G))t=null;
-else if(/FILME|COLETANEA|LANCAMENTO|CINEMA|DRAMA|DOCUMENTARIO|FANTASIA|ACAO|COMEDIA|TERROR|ROMANCE|SUSPENSE/.test(G))t='filme';
-else if(/SERIE|SERIAD|NOVELA|DESENHO|ANIME/.test(G))t='serie';
-else if(/^(Z ?- ?)?(CANAIS|RADIOS)/.test(G))t='canal';
-else t=null;
-   if(fonte&&t){t='canal';c=fonte+' · '+c}
-   if(!TV_ATIVA&&t=='canal')t=null;
-   m=t&&{n:l.slice(i+1).trim()||'Sem nome',c,t,l:lg,a:/ADULT/.test(G)};
-  }else if(m&&l&&l[0]!='#'){
+   const grupo=(/group-title="([^"]*)"/i.exec(l)||[])[1]||'Outros';
+   const logo=(/tvg-logo="(https?:[^"]*)"/i.exec(l)||[])[1]||'';
+
+   let inicio=l.lastIndexOf('",');
+   inicio=inicio<0?l.indexOf(','):inicio+1;
+
+   const G=norm(grupo).replace(/^[^A-Z0-9]+/,'');
+   let tipo=null;
+
+   if(/AREA DO CLIENTE|PEDIDOS/.test(G)){
+    tipo=null;
+   }
+   else if(/FILME|COLETANEA|LANCAMENTO|CINEMA/.test(G)){
+    tipo='filme';
+   }
+   else if(/SERIE|SERIAD|NOVELA|DESENHO|ANIME/.test(G)){
+    tipo='serie';
+   }
+   else if(/^(Z ?- ?)?(CANAIS|RADIOS)/.test(G)){
+    tipo='canal';
+   }
+
+   let categoria=grupo
+    .replace(/[^A-Za-zÀ-ÿ0-9+&\/|=:. -]+/g,' ')
+    .replace(/^[\s|=:\/-]+|[\s|=:\/-]+$/g,'')
+    .split(/\s*[|=:]\s*|\s+\/\s+/)
+    .pop()
+    .trim()
+    .toLowerCase()
+    .replace(/(^|\s)\S/g,x=>x.toUpperCase())||'Outros';
+
+   if(fonte&&tipo){
+    tipo='canal';
+    categoria=fonte+' · '+categoria;
+   }
+
+   if(!TV_ATIVA&&tipo==='canal')tipo=null;
+
+   m=tipo?{
+    n:l.slice(inicio+1).trim()||'Sem nome',
+    c:categoria,
+    t:tipo,
+    l:logo,
+    a:/ADULT/.test(G)
+   }:null;
+  }
+  else if(m&&l&&l[0]!='#'){
    m.u=l;
-   if(m.t=='serie')addEp(m);
-   else{pl(D[m.t],m.c).push(m);ALL.push(m)}
+
+   if(m.t==='serie'){
+    addEp(m);
+   }else{
+    pl(D[m.t],m.c).push(m);
+    ALL.push(m);
+   }
+
    m=null;
+
    if(++cont%700===0)await PAUSA_PARSE();
   }
  }
