@@ -82,19 +82,52 @@ function assinaturaCatalogo(){
 }
 async function boot(){
  rc($('#app'),el('p','ld','Carregando catálogo…'));
+
  try{
   const listas=await baixar();
+
+  if(!listas.length){
+   throw new Error('Nenhuma lista foi baixada');
+  }
+
   await montar(listas);
-  console.log('LISTAS BAIXADAS:',listas.length);
-  console.log('TOTAL DE ITENS:',ALL.length);
-  console.log('FILMES:',Object.values(D.filme).reduce((a,v)=>a+v.length,0));
-  console.log('SÉRIES:',Object.values(D.serie).reduce((a,v)=>a+v.length,0));
+
   assinaturaAtual=assinaturaCatalogo();
-  ultAtu=Date.now();HERO=null;go('home',1);
-  if(!ALL.length)toast('Nenhum conteúdo foi carregado. Verifique a internet e as listas.');
+  ultAtu=Date.now();
+  HERO=null;
+
+  console.log('ABB DIAGNÓSTICO');
+  console.log('Listas baixadas:',listas.length);
+  console.log('Total:',ALL.length);
+  console.log('Filmes:',Object.values(D.filme).reduce((n,a)=>n+a.length,0));
+  console.log('Séries:',Object.values(D.serie).reduce((n,a)=>n+a.length,0));
+
+  if(!ALL.length){
+   rc(
+    $('#app'),
+    el('div','dev',
+     '⚠ Nenhum conteúdo foi processado. '+
+     listas.length+' lista(s) foram baixadas, mas 0 itens foram encontrados.'
+    )
+   );
+   toast('Listas baixadas, mas nenhum item foi processado');
+   return;
+  }
+
+  toast(ALL.length.toLocaleString('pt-BR')+' itens carregados');
+  go('home',1);
+
  }catch(e){
   console.error('Falha ao montar catálogo',e);
-  rc($('#app'),el('p','em','Não foi possível carregar o catálogo. Verifique a conexão e tente novamente.'));
+
+  rc(
+   $('#app'),
+   el('div','dev',
+    '⚠ Erro ao carregar catálogo: '+e.message
+   )
+  );
+
+  toast('Erro ao carregar: '+e.message);
  }
 }
 
