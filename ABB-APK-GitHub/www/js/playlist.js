@@ -130,7 +130,7 @@ async function boot(){
   const listas=await baixar();
 
   if(!listas.length){
-   throw new Error('Nenhuma lista foi baixada');
+   throw new Error('Nenhuma lista foi carregada');
   }
 
   await montar(listas);
@@ -139,24 +139,27 @@ async function boot(){
   ultAtu=Date.now();
   HERO=null;
 
-  console.log('ABB DIAGNÓSTICO');
-  console.log('Listas baixadas:',listas.length);
-  console.log('Total:',ALL.length);
-  console.log('Filmes:',Object.values(D.filme).reduce((n,a)=>n+a.length,0));
-  console.log('Séries:',Object.values(D.serie).reduce((n,a)=>n+a.length,0));
-
   if(!ALL.length){
    rc(
     $('#app'),
-    el('div','dev',
-     '⚠ Nenhum conteúdo foi processado. '+
-     listas.length+' lista(s) foram baixadas, mas 0 itens foram encontrados.'
-    )
+    el('p','em','Nenhum conteúdo foi encontrado nas listas.')
    );
-   toast('Listas baixadas, mas nenhum item foi processado');
    return;
   }
 
+  go('home',1);
+
+ }catch(e){
+  console.error('Falha ao montar catálogo',e);
+
+  rc(
+   $('#app'),
+   el('p','em','Não foi possível carregar o catálogo. Verifique a conexão e tente novamente.')
+  );
+
+  toast('Erro ao carregar o catálogo');
+ }
+}
   toast(ALL.length.toLocaleString('pt-BR')+' itens carregados');
   go('home',1);
 
