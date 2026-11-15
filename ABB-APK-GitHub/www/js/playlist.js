@@ -23,11 +23,11 @@ async function parse(txt,fonte){
    const lg=(/tvg-logo="(https?:[^"]*)"/i.exec(l)||[])[1]||'';
    let i=l.lastIndexOf('",');i=i<0?l.indexOf(','):i+1;
    const G=norm(g).replace(/^[^A-Z0-9]+/,'');let t='canal';
-   if(/^(Z ?- ?)?(CANAIS|RADIOS)/.test(G))t='canal';
-   else if(/AREA DO CLIENTE|PEDIDOS/.test(G))t=null;
-   else if(/SERIE|SERIAD|NOVELA|DESENHO|ANIME/.test(G))t='serie';
-   else if(/FILME|COLETANEA|LANCAMENTO|CINEMA/.test(G))t='filme';
-   let c=g.replace(/[^A-Za-zÀ-ÿ0-9+&\/|=:. -]+/g,' ').replace(/^[\s|=:\/-]+|[\s|=:\/-]+$/g,'').split(/\s*[|=:]\s*|\s+\/\s+/).pop().trim().toLowerCase().replace(/(^|\s)\S/g,x=>x.toUpperCase())||'Outros';
+   if(/AREA DO CLIENTE|PEDIDOS/.test(G))t=null;
+else if(/FILME|COLETANEA|LANCAMENTO|CINEMA|DRAMA|DOCUMENTARIO|FANTASIA|ACAO|COMEDIA|TERROR|ROMANCE|SUSPENSE/.test(G))t='filme';
+else if(/SERIE|SERIAD|NOVELA|DESENHO|ANIME/.test(G))t='serie';
+else if(/^(Z ?- ?)?(CANAIS|RADIOS)/.test(G))t='canal';
+else t=null;
    if(fonte&&t){t='canal';c=fonte+' · '+c}
    if(!TV_ATIVA&&t=='canal')t=null;
    m=t&&{n:l.slice(i+1).trim()||'Sem nome',c,t,l:lg,a:/ADULT/.test(G)};
