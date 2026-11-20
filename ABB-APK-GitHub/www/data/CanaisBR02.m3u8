@@ -1,25 +1,16 @@
 #EXTM3U
-#EXTINF:0 group-title="FILMES",
-#EXTSIZE: Big
-
 #EXTINF:0 group-title="FILMES", CAPITÃO AMÉRICA: O PRIMEIRO VINGADOR
 http://cdnfe3.azureedge.net/RCFServer2/ondemand/CAPTAMRC1.mp4?attachment=true
-
 #EXTINF:0 group-title="FILMES", CAPITÃ MARVEL
 http://cdnfe3.azureedge.net/RCFServer2/ondemand/CPTMRVL.mp4?attachment=true
-
 #EXTINF:0 group-title="FILMES", HOMEM DE FERRO
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO01.mp4?attachment=true
-
 #EXTINF:0 group-title="FILMES", HOMEM DE FERRO 2
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO02.mp4?attachment=true
-
 #EXTINF:0 group-title="MARVEL", O INCRÍVEL HULK
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/OINCVLHLK.mp4?attachment=true
-
 #EXTINF:0 group-title="MARVEL", THOR
 http://thor.lhmtv.gq/filmes/thor-dub-1080p.mp4?LHMTv
-
 #EXTINF:0 group-title="MARVEL", OS VINGADORES
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/OSVGDRS.mp4?attachment=true
 
