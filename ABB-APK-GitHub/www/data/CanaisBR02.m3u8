@@ -1,19 +1,163 @@
 #EXTM3U
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem de Ferro 2008",Homem de Ferro 2008
-https://drive.google.com/uc?export=download&id=1J1CFY7k8-7yZ-BQLzQxHXb2q1ZCIZYyS
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem de Ferro 2",Homem de Ferro 2
-http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO02.mp4?attachment=true
-#EXTINF:-1 group-title="FILMES" tvg-name="Homen de Ferro 3",Homen de Ferro 3
-https://drive.google.com/uc?export=download&id=13MZvS39MezD3noVOntA6H1WlK2NMevGi
-#EXTINF:-1 group-title="FILMES" tvg-name="Homen Aranha De volta ao lar",Homen Aranha De volta ao lar
-https://drive.google.com/uc?export=download&id=1J8s4HTLSYd5cOTZjX6V0fVcmW9YwhiHj
-#EXTINF:-1 group-title="FILMES" tvg-name="Viúva Negra (2021)",Viúva Negra (2021)
-https://drive.google.com/uc?export=download&id=1OCRS44vpNy61G5AftmAgkN4KO__F-2Qf
-#EXTINF:-1 group-title="FILMES" tvg-name="Doutor Estranho (2016)",Doutor Estranho (2016)
-https://drive.google.com/uc?export=download&id=1-aR8Srm6dZbsQw1wb1GNkB8sdBG--P7u
-#EXTINF:-1 group-title="FILMES" tvg-name="Venom",Venom
-https://drive.google.com/uc?export=download&id=1o7Cr-iijJkK9lo4VTvBj4kMGOeaFbHzc
-#EXTINF:-1 group-title="FILMES" tvg-name="Venom: Tempo de Carnificina",Venom: Tempo de Carnificina
-https://drive.google.com/uc?export=download&id=1p2vo9F1IEhYUO1tlqG6CsWOh9BjyFsDb
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem-Aranha - De Volta Ao Lar",Homem-Aranha - De Volta Ao Lar
-https://drive.google.com/uc?export=download&id=0B_j4d8dgZNLdVC02WXpySlgtd2s&resourcekey=0-7olTYTo8YvxUbJZ4UZgMyQ
+#EXTINF:-1 type="video" group-title="FILMES - BATMAN",Batman - O Filme DUB 1966
+https://docs.google.com/uc?export=download&id=1I9Wj24hAOR5EctWFoKLum_uqdoq_6DV0
+#EXTINF:-1 type="video" group-title="FILMES - BATMAN",Batman DUB 1989
+https://docs.google.com/uc?export=download&id=1lB8MqsYGGiUJuRgHqo0WCKTqlBuysNdj
+#EXTINF:-1 type="video" group-title="FILMES - BATMAN",Batman: O Retorno DUB 1992
+https://drive.google.com/file/d/1RQ8civqOwsMHGiTBbg4YEHAxLdGzUMpd/view
+#EXTINF:-1 type="video" group-title="FILMES - BATMAN",Batman Eternamente DUB 1995
+https://drive.google.com/file/d/1_fRZ0w6eX4qiaHf6rRaa0tXX1FuoiotS/view
+#EXTINF:-1 type="video" group-title="FILMES - LANÇAMENTOS 2017",A Torre Negra DUB 2017
+https://docs.google.com/file/d/1Cfc50EOea4gMqAu6vtQM26U3vtXDsODa/preview
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",Pato Pato Ganso DUB 2018
+https://drive.google.com/file/d/1eLC3BE8ESsh9IXcEnyagOHez-AyhFhDf/view
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",O Homem das Cavernas DUB 2018
+https://drive.google.com/file/d/12pOXbm_uN3cwXlcide6jiMKHbyFWWiEM/view
+#EXTINF:-1 type="video" group-title="FILMES - LANÇAMENTOS 2017",Até o Último Homem DUB 2017
+https://drive.google.com/file/d/13uK6gkT4IrCkqYOfOQPpAQ4fe539O1Qn/view
+#EXTINF:-1 type="video" group-title="FILMES - LANÇAMENTOS 2017",A Lenda de Tarzan DUB 2017
+https://drive.google.com/file/d/1bU0aVoHK0l7C0pwJ2t46vRxOJk3iB79U/view
+#EXTINF:-1 type="video" group-title="FILMES - LANÇAMENTOS 2017",Beleza Oculta DUB 2017
+https://drive.google.com/file/d/1lCXijb_IIfJ3i_GEtsuJZgJSdIfdQJpi/view
+#EXTINF:-1 type="video" group-title="FILMES - DIVERSOS",Coach Carter - Treino para a Vida DUB 2005
+https://drive.google.com/file/d/1u1fywwqGbobaP0dhFPcKJUwkJpeRvn-I/view
+#EXTINF:-1 type="video" group-title="FILMES - DIVERSOS",Creed - Nascido para Lutar DUB 2016
+https://drive.google.com/file/d/12uTJvDowoOcpNzKuNb32Wp6VMjjoIIGj/view
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",A Bela Adormecida DUB 1959
+https://docs.google.com/file/d/1wh-8i5S02UzPsCEtwQag3PdEipxxvhke/preview
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",101 Dálmatas DUB 1961
+https://docs.google.com/file/d/1EBrFCIWy0HydSDls953Iy_srvoaVb7xI/preview
+#EXTINF:-1 type="video" group-title="FILMES - DIVERSOS",13 Horas: Os Soldados Secretos de Benghazi DUB 2016
+https://docs.google.com/file/d/1PokMTrhZE9I6VkQMw_x14Jmbo2qDcnLO/preview
+#EXTINF:-1 type="video" group-title="FILMES - NACIONAL",Amor.com (2016) Nacional
+https://ia800605.us.archive.org/3/items/luaAmor/luaAmor.MP4
+#EXTINF:-1 type="video" group-title="FILMES - COMÉDIA",Aladdin 1986
+https://drive.google.com/file/d/0B8LVNRKHi7E3ck5PTm9BdHlNZDg/view
+#EXTINF:-1 type="video" group-title="FILMES - COMÉDIA",O Máskara 1994
+https://drive.google.com/file/d/0B1sBpI-LyYpdM0JkUEtxckZNOTQ/view
+#EXTINF:-1 type="video" group-title="FILMES - LANÇAMENTOS 2018",Feito na América DUB 2018
+https://onedrive.live.com/download?resid=C2A5D9831A4FD617!337&authkey=!AAuuA1ahFozTu1M
+#EXTINF:-1 type="video" group-title="FILMES - DIVERSOS",Jurassic World - O Mundo dos Dinossauros DUB 2015
+https://docs.google.com/file/d/1Me1iNchAzHhl-j4j6h0mw9uZG6_xuvo5/preview
+#EXTINF:-1 type="video" group-title="FILMES - NACIONAL",CONTRATO VITALÍCIO
+https://mahimeta.com/videoads/video_playback.mp4
+#EXTINF:-1 type="video" group-title="FILMES - 007",007 Contra o Satânico Dr. No DUB 1962
+https://drive.google.com/file/d/19cFFC82LbKs0i2DCROsUFDMQeiMMhVNh/view
+#EXTINF:-1 type="video" group-title="FILMES - 007",Moscou Contra 007 DUB 1963
+https://drive.google.com/file/d/1r6pEg7jrpc4kKmVLSrCg7oF9Mrt-0U5M/view
+#EXTINF:-1 type="video" group-title="FILMES - 007",007 Contra Goldfinger DUB 1964
+https://drive.google.com/file/d/1wRWASvgudJgJFEFcmVUArdudfdMVJM0c/view
+#EXTINF:-1 type="video" group-title="FILMES - 007",007 Contra a Chantagem Atômica DUB 1965
+https://drive.google.com/file/d/1Q2ktD75CoB0zX40A_SMdWXfNRnFS3pWJ/view
+#EXTINF:-1 type="video" group-title="FILMES - 007",Com 007 Só Se Vive 2 Vezes DUB 1967
+https://drive.google.com/file/d/154Q-8c2UJjg1MfNsNPk3wfNeEjSATCDO/view
+#EXTINF:-1 type="video" group-title="FILMES - FICÇÃO",ELI (2019)
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/ELI.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",CRIMES OBSCUROS (2019)
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/CRMSOBSCRS.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",A CASA DO MEDO (2015)
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/ACSDMDO2015.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",A CASA DO MEDO: GHOSTLAND (2018)
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/ACSDMDOINCDNEMGHSTLND.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - DRAMA",STAR IS BORN
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/NSCUMAESTLA.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - DRAMA",BOHEMIA RHAPSODY
+http://meili.lhmtv.gq/Filmes/PT/2018/Bohemian.Rhapsody.2019.1080p.mkv?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - FICÇÃO",JURASSIC WORLD: REINO AMEAÇADO
+http://meili.lhmtv.gq/Filmes/PT/2018/Jurassic.World.Reino.Amea%c3%a7ado.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",VELOZES E FURIOSOS 8
+http://meili.lhmtv.gq/Filmes/PT/2017/Velozes.e.Furiosos.8.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",ANJOS DA NOITE: REBELIÃO
+http://meili.lhmtv.gq/Filmes/BR/Anjos%20da%20Noite%203%20-%20A%20Rebeli%c3%a3o.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",ANNABELLE 3
+http://thor.lhmtv.gq/filmes/annabelle3ts-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",TOY STORY 4
+http://thor.lhmtv.gq/filmes/toystory4ts-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",ALADDIN (2019)
+http://thor.lhmtv.gq/filmes/aladdints-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",REPLICAS
+http://thor.lhmtv.gq/filmes/replicas-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - FICÇÃO",MIB INTERNACIONAL
+http://thor.lhmtv.gq/filmes/mibinternacional-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",PARQUE DO INFERNO
+http://thor.lhmtv.gq/filmes/parquedoinferno-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",JOHN WICK 3
+http://thor.lhmtv.gq/filmes/johnwick3ts-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",DETETIVE PIKACHU
+http://thor.lhmtv.gq/filmes/detetivepikachu-dub-360p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",CEMITÉRIO MALDITO
+http://thor.lhmtv.gq/filmes/cemiteriomalditots-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",CEMITÉRIO MALDITO (2019)
+http://meili.lhmtv.gq/Filmes/PT/2019/Pet.Sematary.2019.1080p.mkv?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",SHAZAM
+http://thor.lhmtv.gq/filmes/shazam-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",ALITA: ANJO DE COMBATE
+http://thor.lhmtv.gq/filmes/alitaanjocombate-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",ESCAPE ROOM
+http://thor.lhmtv.gq/filmes/escaperoom-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",BUMBLEBEE
+http://thor.lhmtv.gq/filmes/buumblebee-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",HOMEM-ARANHA NO ARANHAVERSO
+http://thor.lhmtv.gq/filmes/aranhaverso-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",AQUAMAN
+http://thor.lhmtv.gq/filmes/aquamanhd-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",WI-FI RALHP
+http://thor.lhmtv.gq/filmes/wifiralphh-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",ANIMAIS FANTÁSTICOS: CRIMES DE GRINDELWALD
+http://thor.lhmtv.gq/filmes/animaisfantasticoscrimesgrindelwald-dub-1080p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - DRAMA",O PRIMEIRO HOMEM
+http://thor.lhmtv.gq/filmes/oprimeirohomem-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - NACIONAL",O DOUTRINADOR
+http://thor.lhmtv.gq/filmes/odoutrinador-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - FICÇÃO",IO (2019)
+http://mrq1.azureedge.net/movies/io2019-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",GOOSEGUMPS 2: HALLOWEEN ASSOMBRADO
+http://thor.lhmtv.gq/filmes/goosegumps2halloween-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",A FREIRA
+http://thor.lhmtv.gq/filmes/afreiranovohd-dub-1080p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",OS INCRÍVEIS 2
+http://thor.lhmtv.gq/filmes/osincriveis2new-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",SLENDERMAN
+http://thor.lhmtv.gq/filmes/slenderman-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - ANIMAÇÃO",HOTEL TRANSILVÂNIA 3
+http://thor.lhmtv.gq/filmes/hoteltransilvania3-dub-1080p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",A MORTE TE DA PARABÉNS
+http://meili.lhmtv.gq/Filmes/PT/2019/Happy.Death.Day.2U.2019.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: O FILME
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN01.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN 2
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN02.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: O CONFRONTO FINAL
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN03.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN ORIGENS: WOLVERINE
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN04.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: PRIMEIRA CLASSE
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN05.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: DIAS DE UM FUTURO ESQUECIDO
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMEN07.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: APOCALIPSE
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/XMENAPCLPSE.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",LOGAN
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/LOGN.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",X-MEN: FÊNIX NEGRA
+http://thor.lhmtv.gq/filmes/xmenfenixnegrats-dub-720p.mp4?LHMTv
+#EXTINF:-1 type="video" group-title="FILMES - COMÉDIA",CARA CADÊ MEU CARRO?
+http://ssiptv.smartlista.org:8880/movie/fg18ykwmuer/nmk6fwrj89x/17131.mp4
+#EXTINF:-1 type="video" group-title="FILMES - COMÉDIA",PENETRAS BOM DE BICO
+http://ssiptv.smartlista.org:8880/movie/fg18ykwmuer/nmk6fwrj89x/20352.mp4
+#EXTINF:-1 type="video" group-title="FILMES - DRAMA",A CABANA
+http://ssiptv.smartlista.org:8880/movie/fg18ykwmuer/nmk6fwrj89x/719.mp4
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",POWER RANGERS: O FILME
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/PWRNGRSOFLM.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - COMÉDIA",SUPER HERÓI: O FILME
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/SPRHRSOFLME.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",TERROR EM SILENT HILL
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/TREMSLNTHLL.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",QUARTETO FANTÁSTICO 2005
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/QRTFNTSC.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - AÇÃO / AVENTURA",QUARTETO FANTÁSTICO E O SURFISTA PRATEADO
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/QRTFNTSCEOSFSTPRT.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - TERROR / SUSPENSE",SENHOR NINGUÉM
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/SRNGUM.mp4?attachment=true
+#EXTINF:-1 type="video" group-title="FILMES - DRAMA",O SUBMARINO AMARELO 1968
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/OSBMRNAMRLO.mp4?attachment=true
