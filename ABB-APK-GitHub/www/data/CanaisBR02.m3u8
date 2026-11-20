@@ -1,19 +1,72 @@
 #EXTM3U
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem de Ferro 2008",Homem de Ferro 2008
-https://drive.google.com/uc?export=download&id=1J1CFY7k8-7yZ-BQLzQxHXb2q1ZCIZYyS
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem de Ferro 2",Homem de Ferro 2
-https://drive.google.com/uc?export=download&id=137luuup1xTofWqWi38wpZplKc6PUNgCM
-#EXTINF:-1 group-title="FILMES" tvg-name="Homen de Ferro 3",Homen de Ferro 3
-https://drive.google.com/uc?export=download&id=13MZvS39MezD3noVOntA6H1WlK2NMevGi
-#EXTINF:-1 group-title="FILMES" tvg-name="Homen Aranha De volta ao lar",Homen Aranha De volta ao lar
-https://drive.google.com/uc?export=download&id=1J8s4HTLSYd5cOTZjX6V0fVcmW9YwhiHj
-#EXTINF:-1 group-title="FILMES" tvg-name="Viúva Negra (2021)",Viúva Negra (2021)
-https://drive.google.com/uc?export=download&id=1OCRS44vpNy61G5AftmAgkN4KO__F-2Qf
-#EXTINF:-1 group-title="FILMES" tvg-name="Doutor Estranho (2016)",Doutor Estranho (2016)
-https://drive.google.com/uc?export=download&id=1-aR8Srm6dZbsQw1wb1GNkB8sdBG--P7u
-#EXTINF:-1 group-title="FILMES" tvg-name="Venom",Venom
-https://drive.google.com/uc?export=download&id=1o7Cr-iijJkK9lo4VTvBj4kMGOeaFbHzc
-#EXTINF:-1 group-title="FILMES" tvg-name="Venom: Tempo de Carnificina",Venom: Tempo de Carnificina
-https://drive.google.com/uc?export=download&id=1p2vo9F1IEhYUO1tlqG6CsWOh9BjyFsDb
-#EXTINF:-1 group-title="FILMES" tvg-name="Homem-Aranha - De Volta Ao Lar",Homem-Aranha - De Volta Ao Lar
-https://drive.google.com/uc?export=download&id=0B_j4d8dgZNLdVC02WXpySlgtd2s&resourcekey=0-7olTYTo8YvxUbJZ4UZgMyQ
+#EXTINF:0 group-title="MARVEL",
+#EXTSIZE: Big
+
+#EXTINF:0 group-title="MARVEL", CAPITÃO AMÉRICA: O PRIMEIRO VINGADOR
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/CAPTAMRC1.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", CAPITÃ MARVEL
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/CPTMRVL.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", HOMEM DE FERRO
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO01.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", HOMEM DE FERRO 2
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO02.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", O INCRÍVEL HULK
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/OINCVLHLK.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", THOR
+http://thor.lhmtv.gq/filmes/thor-dub-1080p.mp4?LHMTv
+
+#EXTINF:0 group-title="MARVEL", OS VINGADORES
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/OSVGDRS.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", HOMEM DE FERRO 3
+http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO03.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", THOR: O MUNDO SOMBRIO
+http://thor.lhmtv.gq/filmes/thormundosombrio-dub-1080p.mp4?LHMTv
+
+#EXTINF:0 group-title="MARVEL", CAPITÃO AMÉRICA: O SOLDADO INVERNAL
+http://thor.lhmtv.gq/bonus/hKaeBd
+
+#EXTINF:0 group-title="MARVEL", GUARDIÕES DA GALÁXIA
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/GRDOESDGLXIA.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", GUARDIÕES DA GALÁXIA VOL 2
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/GRDOESDGLXIAVL2.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", VINGADORES: ERA DE ULTRON
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/VNGDRSEDURON.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", HOMEM-FORMIGA
+http://cdnfe3.azureedge.net/RCFServer2/ondemand/HMNFRMGA.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", CAPITÃO AMÉRICA: GUERRA CIVIL
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/CAPTAMRC3.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", HOMEM-ARANHA: DE VOLTA AO LAR
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/HOMARNHDVLTALR.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", DOUTOR ESTRANHO
+http://cdnfe3.azureedge.net/RCFServer3/ondemand/DRESTNHO.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", PANTERA NEGRA
+http://cdnfe2.azureedge.net/RCFServer4/ondemand/PNTRNGR.mp4?attachment=true
+
+#EXTINF:0 group-title="MARVEL", THOR: RAGNAROK
+http://thor.lhmtv.gq/filmes/thorrag-dub-1080p.mp4?LHMTv
+
+#EXTINF:0 group-title="MARVEL", VINGADORES: GUERRA INFINITA
+http://mrq1.azureedge.net/movies/avengers2new-dub-1080p.mp4
+
+#EXTINF:0 group-title="MARVEL", HOMEM-FORMIGA E VESPA
+http://thor.lhmtv.gq/filmes/homemformigaevespa-dub-1080p.mp4?LHMTv
+
+#EXTINF:0 group-title="MARVEL", VINGADORES: O ULTIMATO
+http://thor.lhmtv.gq/filmes/avengersendgamenew-dub-1080p.mp4?LHMTv
+
+#EXTINF:0 group-title="MARVEL", HOMEM-ARANHA: LONGE DE CASA
+http://thor.lhmtv.gq/filmes/homemaranhalongedecasats-dub-720p.mp4?LHMTv
