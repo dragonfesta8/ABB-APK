@@ -1,17 +1,17 @@
 #EXTM3U
-#EXTINF:0 group-title="MARVEL",
+#EXTINF:0 group-title="FILMES",
 #EXTSIZE: Big
 
-#EXTINF:0 group-title="MARVEL", CAPITÃO AMÉRICA: O PRIMEIRO VINGADOR
+#EXTINF:0 group-title="FILMES", CAPITÃO AMÉRICA: O PRIMEIRO VINGADOR
 http://cdnfe3.azureedge.net/RCFServer2/ondemand/CAPTAMRC1.mp4?attachment=true
 
-#EXTINF:0 group-title="MARVEL", CAPITÃ MARVEL
+#EXTINF:0 group-title="FILMES", CAPITÃ MARVEL
 http://cdnfe3.azureedge.net/RCFServer2/ondemand/CPTMRVL.mp4?attachment=true
 
-#EXTINF:0 group-title="MARVEL", HOMEM DE FERRO
+#EXTINF:0 group-title="FILMES", HOMEM DE FERRO
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO01.mp4?attachment=true
 
-#EXTINF:0 group-title="MARVEL", HOMEM DE FERRO 2
+#EXTINF:0 group-title="FILMES", HOMEM DE FERRO 2
 http://cdnfe3.azureedge.net/RCFServer1/ondemand/HMNDEFRO02.mp4?attachment=true
 
 #EXTINF:0 group-title="MARVEL", O INCRÍVEL HULK
